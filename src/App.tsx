@@ -16,6 +16,7 @@ import {
 } from "./placeholder-data/state-placeholder-data";
 
 import { FormEditSection } from "./components/composite/FormEditContainer/FormEditContainer";
+import { CvPageContainer } from "./components/composite/CvPageContainer/CvPageContainer";
 
 function App() {
     const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
@@ -34,9 +35,10 @@ function App() {
     ]);
 
     return (
-        <>
+        <div className={""}>
             <FormEditSection></FormEditSection>
-        </>
+            <CvPageContainer>lorem ipsum</CvPageContainer>
+        </div>
     );
 }
 
