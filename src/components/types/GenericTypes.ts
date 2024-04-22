@@ -1,0 +1,1 @@
+export type TailwindUtilityClasses = string[];
