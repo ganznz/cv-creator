@@ -1,18 +1,21 @@
 import { useState } from "react";
-import "./App.css";
 import "./index.css";
+
 import {
     PersonalDetails,
     PrimaryEducation,
     SecondaryEducation,
     WorkExperience,
 } from "./models/state-models";
+
 import {
     PersonalDetailsPlaceholderData,
     PrimaryEducationPlaceholderData,
     SecondaryEducationPlaceholderData,
     WorkExperiencePlaceholderData,
 } from "./placeholder-data/state-placeholder-data";
+
+import { FormEditSection } from "./components/composite/FormEditSection/FormEditSection";
 
 function App() {
     const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
@@ -32,8 +35,7 @@ function App() {
 
     return (
         <>
-            <div className="bg-blue-500 text-white p-4">Hello</div>
-            <div className="bg-blue-500 text-black p-4">Hello</div>
+            <FormEditSection></FormEditSection>
         </>
     );
 }
