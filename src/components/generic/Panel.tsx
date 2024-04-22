@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 import { TailwindUtilityClasses } from "../types/GenericTypes";
-import { padding2 } from "../../constants";
+import { padding2 } from "../../constants/tailwind-utility-classes";
 
 export type WrapperProps = {
     children?: ReactNode;
