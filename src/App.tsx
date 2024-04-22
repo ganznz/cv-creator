@@ -15,7 +15,7 @@ import {
     WorkExperiencePlaceholderData,
 } from "./placeholder-data/state-placeholder-data";
 
-import { FormEditSection } from "./components/composite/FormEditSection/FormEditSection";
+import { FormEditSection } from "./components/composite/FormEditContainer/FormEditContainer";
 
 function App() {
     const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
