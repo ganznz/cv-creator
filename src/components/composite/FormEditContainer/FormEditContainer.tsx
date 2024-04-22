@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Navbar from "../Navbar";
+import Navbar from "../../generic/Navbar/Navbar";
 import Button from "../../generic/Buttons/Button";
 
 export const FormEditSection = () => {
@@ -7,8 +7,8 @@ export const FormEditSection = () => {
     const [activePanel, setActiveWindow] = useState("content");
 
     return (
-        <>
-            <Navbar>
+        <div>
+            <Navbar classes={["flex-col", "h-32", "w-2"]}>
                 <Button
                     props={{
                         isActive: activePanel == "content",
@@ -30,6 +30,6 @@ export const FormEditSection = () => {
             </Navbar>
 
             {/* add content section here (edit personal details, education, experience, etc) */}
-        </>
+        </div>
     );
 };
