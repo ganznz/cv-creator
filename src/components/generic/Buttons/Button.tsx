@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from "react";
+import { useState, ComponentProps } from "react";
 import {
     padding2,
     margin1x,
@@ -6,94 +6,103 @@ import {
 import { TailwindUtilityClasses } from "../../types/GenericTypes";
 import { twMerge } from "tailwind-merge";
 
-interface ButtonProps {
+interface ButtonProps extends ComponentProps<"button"> {
     children?: React.ReactNode;
     variant?: "primary" | "info" | "success" | "warn";
-    props?: {
-        isActive?: boolean;
-        onClick?: MouseEventHandler<HTMLButtonElement>;
-    };
+    isActive?: boolean;
     classes?: TailwindUtilityClasses;
 }
 
-const PrimaryButton = ({ children, props, classes }: ButtonProps) => {
-    const [hovered, setHovered] = useState(false);
-
+const PrimaryButton = ({
+    children,
+    classes,
+    isActive,
+    ...props
+}: ButtonProps) => {
     return (
         <button
             type="button"
             className={twMerge(
-                `text-gray-800 ${
-                    (hovered && "bg-gray-200") ||
-                    (props?.isActive && "bg-gray-300") ||
-                    "bg-white"
-                }`,
+                `${!isActive && "hover:bg-gray-200"}`,
+                "text-grey",
+                `${(isActive && "bg-gray-300") || "bg-white"}`,
                 classes?.join(" ")
             )}
-            onClick={props?.onClick}
+            {...props}
         >
             {children}
         </button>
     );
 };
 
-const InfoButton = ({ children, props, classes }: ButtonProps) => {
+const InfoButton = ({ children, classes, isActive, ...props }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
 
     return (
         <button
             type="button"
             className={twMerge(
-                `text-blue-400  ${
-                    (hovered && "bg-gray-200") ||
-                    (props?.isActive && "bg-gray-300") ||
+                `${!isActive && "hover:bg-gray-200"}`,
+                "text-blue-400",
+                `${
+                    (hovered && "bg-gray-300") ||
+                    (isActive && "bg-gray-200") ||
                     "bg-white"
                 }`,
                 classes?.join(" ")
             )}
-            onClick={props?.onClick}
+            {...props}
         >
             {children}
         </button>
     );
 };
 
-const SuccessButton = ({ children, props, classes }: ButtonProps) => {
+const SuccessButton = ({
+    children,
+    classes,
+    isActive,
+    ...props
+}: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
 
     return (
         <button
             type="button"
             className={twMerge(
-                `text-green-400  ${
-                    (hovered && "bg-gray-200") ||
-                    (props?.isActive && "bg-gray-300") ||
+                `${!isActive && "hover:bg-gray-200"}`,
+                "text-green-400",
+                ` ${
+                    (hovered && "bg-gray-300") ||
+                    (isActive && "bg-gray-200") ||
                     "bg-white"
                 }`,
                 classes?.join(" ")
             )}
-            onClick={props?.onClick}
+            {...props}
         >
             {children}
         </button>
     );
 };
 
-const WarnButton = ({ children, props, classes }: ButtonProps) => {
+const WarnButton = ({ children, classes, isActive, ...props }: ButtonProps) => {
     const [hovered, setHovered] = useState(false);
 
     return (
         <button
             type="button"
             className={twMerge(
-                `text-red-400 ${
-                    (hovered && "bg-gray-200") ||
-                    (props?.isActive && "bg-gray-300") ||
+                `${!isActive && "hover:bg-gray-200"}`,
+                "text-red-400",
+                ` ${
+                    (hovered && "bg-gray-300") ||
+                    (isActive && "bg-gray-200") ||
                     "bg-white"
                 }`,
                 classes?.join(" ")
             )}
-            onClick={props?.onClick}
+            {...props}
         >
             {children}
         </button>
@@ -102,8 +111,9 @@ const WarnButton = ({ children, props, classes }: ButtonProps) => {
 
 export default function Button({
     children,
+    isActive,
     variant = "primary",
-    props,
+    ...props
 }: ButtonProps) {
     const defaultClasses = [
         "transition-colors",
@@ -119,16 +129,44 @@ export default function Button({
     switch (variant) {
         case "primary":
             return (
-                <PrimaryButton props={props} classes={defaultClasses}>
+                <PrimaryButton
+                    classes={defaultClasses}
+                    isActive={isActive}
+                    {...props}
+                >
                     {children}
                 </PrimaryButton>
             );
         case "info":
-            return <InfoButton props={props}>{children}</InfoButton>;
+            return (
+                <InfoButton
+                    classes={defaultClasses}
+                    isActive={isActive}
+                    {...props}
+                >
+                    {children}
+                </InfoButton>
+            );
         case "success":
-            return <SuccessButton props={props}>{children}</SuccessButton>;
+            return (
+                <SuccessButton
+                    classes={defaultClasses}
+                    isActive={isActive}
+                    {...props}
+                >
+                    {children}
+                </SuccessButton>
+            );
         case "warn":
-            return <WarnButton props={props}>{children}</WarnButton>;
+            return (
+                <WarnButton
+                    classes={defaultClasses}
+                    isActive={isActive}
+                    {...props}
+                >
+                    {children}
+                </WarnButton>
+            );
     }
     return <button type="button">{children}</button>;
 }
