@@ -1,10 +1,7 @@
-import { useState, ComponentProps } from "react";
-import {
-    padding2,
-    margin1x,
-} from "../../../constants/tailwind-utility-classes";
+import { ComponentProps } from "react";
 import { TailwindUtilityClasses } from "../../types/GenericTypes";
 import { twMerge } from "tailwind-merge";
+import { padding2 } from "../../../constants/tailwind-utility-classes";
 
 interface ButtonProps extends ComponentProps<"button"> {
     children?: React.ReactNode;
@@ -23,9 +20,12 @@ const PrimaryButton = ({
         <button
             type="button"
             className={twMerge(
-                `${!isActive && "hover:bg-gray-200"}`,
-                "text-grey",
-                `${(isActive && "bg-gray-300") || "bg-white"}`,
+                `${
+                    (!isActive || isActive == undefined) && "hover:bg-gray-200"
+                } ${
+                    ((isActive || isActive == undefined) && "bg-gray-300") ||
+                    "bg-white"
+                } text-grey`,
                 classes?.join(" ")
             )}
             {...props}
@@ -36,19 +36,16 @@ const PrimaryButton = ({
 };
 
 const InfoButton = ({ children, classes, isActive, ...props }: ButtonProps) => {
-    const [hovered, setHovered] = useState(false);
-
     return (
         <button
             type="button"
             className={twMerge(
-                `${!isActive && "hover:bg-gray-200"}`,
-                "text-blue-400",
                 `${
-                    (hovered && "bg-gray-300") ||
-                    (isActive && "bg-gray-200") ||
+                    (!isActive || isActive == undefined) && "hover:bg-blue-200"
+                } ${
+                    ((isActive || isActive == undefined) && "bg-blue-100") ||
                     "bg-white"
-                }`,
+                } text-blue-700`,
                 classes?.join(" ")
             )}
             {...props}
@@ -64,19 +61,16 @@ const SuccessButton = ({
     isActive,
     ...props
 }: ButtonProps) => {
-    const [hovered, setHovered] = useState(false);
-
     return (
         <button
             type="button"
             className={twMerge(
-                `${!isActive && "hover:bg-gray-200"}`,
-                "text-green-400",
-                ` ${
-                    (hovered && "bg-gray-300") ||
-                    (isActive && "bg-gray-200") ||
+                `${
+                    (!isActive || isActive == undefined) && "hover:bg-green-200"
+                } ${
+                    ((isActive || isActive == undefined) && "bg-green-100") ||
                     "bg-white"
-                }`,
+                } text-green-700`,
                 classes?.join(" ")
             )}
             {...props}
@@ -87,19 +81,16 @@ const SuccessButton = ({
 };
 
 const WarnButton = ({ children, classes, isActive, ...props }: ButtonProps) => {
-    const [hovered, setHovered] = useState(false);
-
     return (
         <button
             type="button"
             className={twMerge(
-                `${!isActive && "hover:bg-gray-200"}`,
-                "text-red-400",
-                ` ${
-                    (hovered && "bg-gray-300") ||
-                    (isActive && "bg-gray-200") ||
+                `${
+                    (!isActive || isActive == undefined) && "hover:bg-red-200"
+                } ${
+                    ((isActive || isActive == undefined) && "bg-red-100") ||
                     "bg-white"
-                }`,
+                } text-red-700`,
                 classes?.join(" ")
             )}
             {...props}
@@ -113,60 +104,44 @@ export default function Button({
     children,
     isActive,
     variant = "primary",
+    classes,
     ...props
 }: ButtonProps) {
     const defaultClasses = [
-        "transition-colors",
         "flex",
-        "flex-col",
+        "flex-1",
         "justify-center",
         "content-center",
+        "transition-colors",
         "rounded",
         `${padding2}`,
-        `${margin1x}`,
     ];
+    classes = (classes && defaultClasses.concat(classes)) || defaultClasses;
 
     switch (variant) {
         case "primary":
             return (
-                <PrimaryButton
-                    classes={defaultClasses}
-                    isActive={isActive}
-                    {...props}
-                >
+                <PrimaryButton classes={classes} isActive={isActive} {...props}>
                     {children}
                 </PrimaryButton>
             );
         case "info":
             return (
-                <InfoButton
-                    classes={defaultClasses}
-                    isActive={isActive}
-                    {...props}
-                >
+                <InfoButton classes={classes} isActive={isActive} {...props}>
                     {children}
                 </InfoButton>
             );
         case "success":
             return (
-                <SuccessButton
-                    classes={defaultClasses}
-                    isActive={isActive}
-                    {...props}
-                >
+                <SuccessButton classes={classes} isActive={isActive} {...props}>
                     {children}
                 </SuccessButton>
             );
         case "warn":
             return (
-                <WarnButton
-                    classes={defaultClasses}
-                    isActive={isActive}
-                    {...props}
-                >
+                <WarnButton classes={classes} isActive={isActive} {...props}>
                     {children}
                 </WarnButton>
             );
     }
-    return <button type="button">{children}</button>;
 }
