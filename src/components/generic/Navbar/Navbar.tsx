@@ -3,12 +3,23 @@ import Panel from "../Panel";
 import { TailwindUtilityClasses } from "../../types/GenericTypes";
 
 interface NavbarProps {
+    direction: "horizontal" | "vertical";
+
     children: React.ReactNode;
     classes?: TailwindUtilityClasses;
 }
 
-export default function Navbar({ children, classes }: NavbarProps) {
-    const defaultClasses = ["flex", "flex-1", "rounded"];
+export default function Navbar({ direction, children, classes }: NavbarProps) {
+    const defaultClasses = [
+        "flex",
+        "inline-flex",
+        "justify-between",
+        "basis-0",
+        "rounded",
+        "gap-3",
+        "padding-3",
+        (direction == "vertical" && "flex-col") || "flex-row",
+    ];
     return (
         <>
             <Panel

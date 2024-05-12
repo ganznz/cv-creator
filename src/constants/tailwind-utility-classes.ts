@@ -23,3 +23,5 @@ export const gap1 = "gap-1";
 export const gap2 = "gap-2";
 export const gap3 = "gap-3";
 export const gap4 = "gap-4";
+export const gap5 = "gap-5";
+export const gap6 = "gap-6";
