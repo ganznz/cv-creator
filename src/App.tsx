@@ -1,22 +1,20 @@
 import { useState } from "react";
 import "./index.css";
-
 import {
     PersonalDetails,
     PrimaryEducation,
     SecondaryEducation,
     WorkExperience,
 } from "./models/state-models";
-
 import {
     PersonalDetailsPlaceholderData,
     PrimaryEducationPlaceholderData,
     SecondaryEducationPlaceholderData,
     WorkExperiencePlaceholderData,
 } from "./placeholder-data/state-placeholder-data";
-
-import { FormEditSection } from "./components/composite/FormEditContainer/FormEditContainer";
+import { FormEditSection } from "./components/composite/FormEditContainer/FormEditSection";
 import { CvPageContainer } from "./components/composite/CvPageContainer/CvPageContainer";
+import { gap6 } from "./constants/tailwind-utility-classes";
 
 function App() {
     const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
@@ -35,7 +33,7 @@ function App() {
     ]);
 
     return (
-        <div className={""}>
+        <div className={`flex justify-evenly ${gap6}`}>
             <FormEditSection></FormEditSection>
             <CvPageContainer>lorem ipsum</CvPageContainer>
         </div>
