@@ -7,6 +7,8 @@ interface ButtonProps extends ComponentProps<"button"> {
     children?: React.ReactNode;
     variant?: "primary" | "info" | "success" | "warn";
     isActive?: boolean;
+    visibleHover?: boolean;
+    visibleBackground?: boolean;
     classes?: TailwindUtilityClasses;
 }
 
@@ -14,16 +16,16 @@ const PrimaryButton = ({
     children,
     classes,
     isActive,
+    visibleHover,
+    visibleBackground,
     ...props
 }: ButtonProps) => {
     return (
         <button
             type="button"
             className={twMerge(
-                `${
-                    (!isActive || isActive == undefined) && "hover:bg-gray-200"
-                } ${
-                    ((isActive || isActive == undefined) && "bg-gray-300") ||
+                `${visibleHover && !isActive && "hover:bg-gray-200"} ${
+                    ((visibleBackground || isActive) && "bg-gray-300") ||
                     "bg-white"
                 } text-grey`,
                 classes?.join(" ")
@@ -35,15 +37,20 @@ const PrimaryButton = ({
     );
 };
 
-const InfoButton = ({ children, classes, isActive, ...props }: ButtonProps) => {
+const InfoButton = ({
+    children,
+    classes,
+    isActive,
+    visibleHover,
+    visibleBackground,
+    ...props
+}: ButtonProps) => {
     return (
         <button
             type="button"
             className={twMerge(
-                `${
-                    (!isActive || isActive == undefined) && "hover:bg-blue-200"
-                } ${
-                    ((isActive || isActive == undefined) && "bg-blue-100") ||
+                `${(visibleHover || !isActive) && "hover:bg-blue-200"} ${
+                    ((visibleBackground || isActive) && "bg-blue-100") ||
                     "bg-white"
                 } text-blue-700`,
                 classes?.join(" ")
@@ -59,16 +66,16 @@ const SuccessButton = ({
     children,
     classes,
     isActive,
+    visibleHover,
+    visibleBackground,
     ...props
 }: ButtonProps) => {
     return (
         <button
             type="button"
             className={twMerge(
-                `${
-                    (!isActive || isActive == undefined) && "hover:bg-green-200"
-                } ${
-                    ((isActive || isActive == undefined) && "bg-green-100") ||
+                `${(visibleHover || !isActive) && "hover:bg-green-200"} ${
+                    ((visibleBackground || isActive) && "bg-green-100") ||
                     "bg-white"
                 } text-green-700`,
                 classes?.join(" ")
@@ -80,15 +87,20 @@ const SuccessButton = ({
     );
 };
 
-const WarnButton = ({ children, classes, isActive, ...props }: ButtonProps) => {
+const WarnButton = ({
+    children,
+    classes,
+    isActive,
+    visibleHover,
+    visibleBackground,
+    ...props
+}: ButtonProps) => {
     return (
         <button
             type="button"
             className={twMerge(
-                `${
-                    (!isActive || isActive == undefined) && "hover:bg-red-200"
-                } ${
-                    ((isActive || isActive == undefined) && "bg-red-100") ||
+                `${(visibleHover || !isActive) && "hover:bg-red-200"} ${
+                    ((visibleBackground || isActive) && "bg-red-100") ||
                     "bg-white"
                 } text-red-700`,
                 classes?.join(" ")
@@ -102,8 +114,10 @@ const WarnButton = ({ children, classes, isActive, ...props }: ButtonProps) => {
 
 export default function Button({
     children,
-    isActive,
     variant = "primary",
+    isActive,
+    visibleHover = false,
+    visibleBackground = false,
     classes,
     ...props
 }: ButtonProps) {
@@ -121,25 +135,49 @@ export default function Button({
     switch (variant) {
         case "primary":
             return (
-                <PrimaryButton classes={classes} isActive={isActive} {...props}>
+                <PrimaryButton
+                    classes={classes}
+                    isActive={isActive}
+                    visibleHover={visibleHover}
+                    visibleBackground={visibleBackground}
+                    {...props}
+                >
                     {children}
                 </PrimaryButton>
             );
         case "info":
             return (
-                <InfoButton classes={classes} isActive={isActive} {...props}>
+                <InfoButton
+                    classes={classes}
+                    isActive={isActive}
+                    visibleHover={visibleHover}
+                    visibleBackground={visibleBackground}
+                    {...props}
+                >
                     {children}
                 </InfoButton>
             );
         case "success":
             return (
-                <SuccessButton classes={classes} isActive={isActive} {...props}>
+                <SuccessButton
+                    classes={classes}
+                    isActive={isActive}
+                    visibleHover={visibleHover}
+                    visibleBackground={visibleBackground}
+                    {...props}
+                >
                     {children}
                 </SuccessButton>
             );
         case "warn":
             return (
-                <WarnButton classes={classes} isActive={isActive} {...props}>
+                <WarnButton
+                    classes={classes}
+                    isActive={isActive}
+                    visibleHover={visibleHover}
+                    visibleBackground={visibleBackground}
+                    {...props}
+                >
                     {children}
                 </WarnButton>
             );
