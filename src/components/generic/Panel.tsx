@@ -9,8 +9,15 @@ export type WrapperProps = {
 };
 
 export default function Panel({ children, classes }: WrapperProps) {
-    const defaultClasses = `bg-white ${padding2}`;
-    const allClasses = twMerge(defaultClasses, classes?.join(" "));
+    const defaultClasses: TailwindUtilityClasses = [
+        "bg-white",
+        `${padding2}`,
+        "rounded-lg",
+        "drop-shadow-md",
+        "hover:drop-shadow-xl",
+        "transition-all",
+    ];
+    const allClasses = twMerge(defaultClasses.join(" "), classes?.join(" "));
 
     return <div className={allClasses}>{children}</div>;
 }
