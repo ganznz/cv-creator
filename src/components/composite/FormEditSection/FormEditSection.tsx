@@ -10,7 +10,7 @@ export const FormEditSection = () => {
 
     return (
         <div className={`h-full flex ${gap6} sticky top-[30px]`}>
-            <Navbar direction="vertical">
+            <Navbar direction="vertical" classes={["self-start"]}>
                 <Button
                     isActive={activePanel == "content"}
                     onClick={() => setActiveWindow("content")}
@@ -31,8 +31,8 @@ export const FormEditSection = () => {
                 </Button>
             </Navbar>
 
-            <div className="w-[30rem] flex flex-col items-center">
-                <Navbar direction="horizontal" classes={["w-[21rem]"]}>
+            <div className={`w-[20rem] flex flex-col items-center ${gap6}`}>
+                <Navbar direction="horizontal" classes={["w-full"]}>
                     <Button variant="success">Load Example</Button>
                     <Button variant="warn">
                         <span className="flex gap-2 justify-center content-center">
