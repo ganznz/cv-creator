@@ -12,12 +12,7 @@ interface NavbarProps {
 export default function Navbar({ direction, children, classes }: NavbarProps) {
     const defaultClasses = [
         "flex",
-        "inline-flex",
-        "justify-between",
-        "basis-0",
-        "rounded",
         "gap-3",
-        "padding-3",
         (direction == "vertical" && "flex-col") || "flex-row",
     ];
     return (
