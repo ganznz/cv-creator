@@ -12,9 +12,8 @@ import {
     SecondaryEducationPlaceholderData,
     WorkExperiencePlaceholderData,
 } from "./placeholder-data/state-placeholder-data";
-import { FormEditSection } from "./components/composite/FormEditContainer/FormEditSection";
+import { FormEditSection } from "./components/composite/FormEditSection/FormEditSection";
 import { CvPageContainer } from "./components/composite/CvPageContainer/CvPageContainer";
-import { gap6 } from "./constants/tailwind-utility-classes";
 
 function App() {
     const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
@@ -33,7 +32,7 @@ function App() {
     ]);
 
     return (
-        <div className={`flex justify-evenly ${gap6}`}>
+        <div className={`flex justify-center gap-10`}>
             <FormEditSection></FormEditSection>
             <CvPageContainer>lorem ipsum</CvPageContainer>
         </div>
