@@ -12,6 +12,7 @@ export const FormEditSection = () => {
         <div className={`h-full flex ${gap6} sticky top-[30px]`}>
             <Navbar direction="vertical" classes={["self-start"]}>
                 <Button
+                    visibleHover={true}
                     isActive={activePanel == "content"}
                     onClick={() => setActiveWindow("content")}
                 >
@@ -21,6 +22,7 @@ export const FormEditSection = () => {
                     </span>
                 </Button>
                 <Button
+                    visibleHover={true}
                     isActive={activePanel == "customize"}
                     onClick={() => setActiveWindow("customize")}
                 >
@@ -33,8 +35,14 @@ export const FormEditSection = () => {
 
             <div className={`w-[20rem] flex flex-col items-center ${gap6}`}>
                 <Navbar direction="horizontal" classes={["w-full"]}>
-                    <Button variant="success">Load Example</Button>
-                    <Button variant="warn">
+                    <Button variant="success" visibleHover={true}>
+                        Load Example
+                    </Button>
+                    <Button
+                        variant="warn"
+                        visibleBackground={true}
+                        visibleHover={true}
+                    >
                         <span className="flex gap-2 justify-center content-center">
                             <i className="fa-solid fa-user"></i>
                             Clear Resume
