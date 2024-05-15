@@ -1,7 +1,8 @@
 import { useState } from "react";
-import Button from "../../../generic/Buttons/Button";
 import { PersonalDetailsContainer } from "./PersonalDetailsContainer/PersonalDetailsContainer";
-import ExpandableDropdown from "../../../generic/Dropdown/ExpandableDropdown";
+import FormDropdown from "../../../generic/Dropdown/FormDropdown";
+import DropdownItem from "../../../generic/Dropdown/DropdownItem";
+
 // interface FormInformationContainerProps {}
 
 export const FormInformationContainer = () => {
@@ -16,18 +17,33 @@ export const FormInformationContainer = () => {
             {/* dropdown component for EDUCATION and WORK EXP here (takes children <list item> components for each place of education/job) */}
             {/* clicking these <list item>'s will display <form /> component to edit information for that place */}
 
-            {/* LIST ITEM CHILDREN FOR THESE WILL BE THE ITEMS INSIDE OF THEIR RESPECTIVE STATE, MAP OVER THEM, AND WHEN THEY'RE CLICKED IT OPENS THE FORM BASED ON THE ID FOR THAT LIST ITEM */}
-            <ExpandableDropdown
+            <FormDropdown
                 name="Education"
-                onExpand={() => setActiveDropdown("education")}
+                onClick={() =>
+                    setActiveDropdown(
+                        activeDropdown === "education" ? null : "education"
+                    )
+                }
                 expanded={activeDropdown === "education"}
-            ></ExpandableDropdown>
+            >
+                <DropdownItem name="Edu1" />
+                <DropdownItem name="Edu2" />
+                <DropdownItem name="Edu3" />
+            </FormDropdown>
 
-            <ExpandableDropdown
+            <FormDropdown
                 name="Experience"
-                onExpand={() => setActiveDropdown("experience")}
+                onClick={() =>
+                    setActiveDropdown(
+                        activeDropdown === "experience" ? null : "experience"
+                    )
+                }
                 expanded={activeDropdown === "experience"}
-            ></ExpandableDropdown>
+            >
+                <DropdownItem name="Exp1" />
+                <DropdownItem name="Exp2" />
+                <DropdownItem name="Exp3" />
+            </FormDropdown>
         </div>
     );
 };

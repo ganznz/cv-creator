@@ -1,11 +1,11 @@
 import Button from "../Buttons/Button";
 
-interface ExpandableDropdownProps {
+export interface ExpandableDropdownProps {
     children: React.ReactNode;
     icon?: React.ReactNode; // fontawesome <i> tag
     name: string;
     expanded: boolean;
-    onExpand;
+    onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 export default function ExpandableDropdown({
@@ -13,22 +13,18 @@ export default function ExpandableDropdown({
     icon,
     name,
     expanded,
-    onExpand,
+    onClick,
 }: ExpandableDropdownProps) {
     return (
-        <div>
-            <Button onClick={onExpand}>
+        <div className="flex flex-col">
+            <Button onClick={onClick}>
                 {icon}
                 <h1>{name}</h1>
             </Button>
 
             {expanded && (
                 <div>
-                    <ul>
-                        {}
-                        {/* children will be <li></li>'s */}
-                    </ul>
-                    {/* +ADD btn here, to add education / work experience to list */}
+                    <ul className="flex flex-col">{children}</ul>
                 </div>
             )}
         </div>
