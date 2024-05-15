@@ -3,7 +3,7 @@ import { TailwindUtilityClasses } from "../../types/GenericTypes";
 import { twMerge } from "tailwind-merge";
 import { padding2 } from "../../../constants/tailwind-utility-classes";
 
-interface ButtonProps extends ComponentProps<"button"> {
+export interface ButtonProps extends ComponentProps<"button"> {
     children?: React.ReactNode;
     variant?: "primary" | "info" | "success" | "warn";
     isActive?: boolean;
