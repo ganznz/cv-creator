@@ -16,24 +16,41 @@ import { FormEditSection } from "./components/composite/FormEditSection/FormEdit
 import { CvPageContainer } from "./components/composite/CvPageContainer/CvPageContainer";
 
 function App() {
-    const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
-        PersonalDetailsPlaceholderData
-    );
-    const [primaryEducation, setPrimaryEducation] = useState<
-        PrimaryEducation[]
-    >([PrimaryEducationPlaceholderData]);
+    const [personalDetails, setPersonalDetails] =
+        useState<PersonalDetails | null>(PersonalDetailsPlaceholderData);
 
-    const [secondaryEducation, setSecondaryEducation] = useState<
-        SecondaryEducation[]
-    >([SecondaryEducationPlaceholderData]);
+    const [primaryEducation, setPrimaryEducation] = useState<{
+        [k: string]: PrimaryEducation;
+    } | null>({
+        [PrimaryEducationPlaceholderData.InstituteName]:
+            PrimaryEducationPlaceholderData,
+    });
 
-    const [workExperience, setWorkExperience] = useState<WorkExperience[]>([
-        WorkExperiencePlaceholderData,
-    ]);
+    const [secondaryEducation, setSecondaryEducation] = useState<{
+        [k: string]: SecondaryEducation;
+    } | null>({
+        [SecondaryEducationPlaceholderData.InstituteName]:
+            SecondaryEducationPlaceholderData,
+    });
+
+    const [workExperience, setWorkExperience] = useState<{
+        [k: string]: WorkExperience;
+    } | null>({
+        [WorkExperiencePlaceholderData.JobName]: WorkExperiencePlaceholderData,
+    });
 
     return (
         <div className={`flex justify-center gap-10`}>
-            <FormEditSection></FormEditSection>
+            <FormEditSection
+                personalDetails={personalDetails}
+                primaryEducation={primaryEducation}
+                secondaryEducation={secondaryEducation}
+                workExperience={workExperience}
+                setPersonalDetails={setPersonalDetails}
+                setPrimaryEducation={setPrimaryEducation}
+                setSecondaryEducation={setSecondaryEducation}
+                setWorkExperience={setWorkExperience}
+            ></FormEditSection>
             <CvPageContainer>lorem ipsum</CvPageContainer>
         </div>
     );
