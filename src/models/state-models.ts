@@ -1,8 +1,7 @@
 export interface PersonalDetails {
-    FirstName: string;
-    LastName: string;
+    ["Full Name"]: string;
     Email?: string;
-    PhoneNumber: string;
+    ["Phone Number"]: string;
     Address: string;
 }
 
