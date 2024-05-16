@@ -6,10 +6,9 @@ import {
 } from "../models/state-models";
 
 export const PersonalDetailsPlaceholderData: PersonalDetails = {
-    FirstName: "John",
-    LastName: "Doe",
+    ["Full Name"]: "John Doe",
     Email: "johndoe@mail.com",
-    PhoneNumber: "+64 12 345 6789",
+    ["Phone Number"]: "+64 12 345 6789",
     Address: "123 Main Street, Whoville",
 } as const;
 
