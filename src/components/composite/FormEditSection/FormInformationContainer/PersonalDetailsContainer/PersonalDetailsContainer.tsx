@@ -1,7 +1,37 @@
 import Form from "../../../../generic/Form/Form";
 import Input from "../../../../generic/Inputs/Input";
+import { PersonalDetails } from "../../../../../models/state-models";
+import { ChangeEvent } from "react";
+import { produce } from "immer";
 
-export const PersonalDetailsContainer = () => {
+interface PersonalDetailsContainerProps {
+    personalDetails: PersonalDetails | null;
+    setPersonalDetails: React.Dispatch<
+        React.SetStateAction<PersonalDetails | null>
+    >;
+}
+
+export const PersonalDetailsContainer = ({
+    personalDetails,
+    setPersonalDetails,
+}: PersonalDetailsContainerProps) => {
+    /**
+     *
+     * @param e - ChangeEvent<HTMLInputElement>
+     * @param id - the key to be updated in the personalDetails state
+     */
+    const updatePersonalDetails = (
+        e: ChangeEvent<HTMLInputElement>,
+        id: keyof PersonalDetails
+    ) => {
+        setPersonalDetails(
+            produce((draft) => {
+                if (draft == null) return;
+                draft[id] = e.target.value;
+            })
+        );
+    };
+
     return (
         <Form className="flex flex-col gap-3">
             <h1 className="text-2xl font-bold italic">Personal Details</h1>
@@ -11,6 +41,8 @@ export const PersonalDetailsContainer = () => {
                 label="Full Name"
                 description="recommended"
                 placeholder="Guardian of the Forest"
+                value={personalDetails ? personalDetails["Full Name"] : ""}
+                onChange={(e) => updatePersonalDetails(e, "Full Name")}
             />
             <Input
                 type="email"
@@ -18,6 +50,8 @@ export const PersonalDetailsContainer = () => {
                 label="Email"
                 description="recommended"
                 placeholder="lorax@whoville.com"
+                value={personalDetails ? personalDetails.Email : ""}
+                onChange={(e) => updatePersonalDetails(e, "Email")}
             />
             <Input
                 type="tel"
@@ -25,6 +59,8 @@ export const PersonalDetailsContainer = () => {
                 label="Phone Number"
                 description="recommended"
                 placeholder="+64 123 4567"
+                value={personalDetails ? personalDetails["Phone Number"] : ""}
+                onChange={(e) => updatePersonalDetails(e, "Phone Number")}
             />
             <Input
                 type="text"
@@ -32,6 +68,8 @@ export const PersonalDetailsContainer = () => {
                 label="Address"
                 description="recommended"
                 placeholder="2 Lorax Lane, Whoville"
+                value={personalDetails ? personalDetails.Address : ""}
+                onChange={(e) => updatePersonalDetails(e, "Address")}
             />
         </Form>
     );
