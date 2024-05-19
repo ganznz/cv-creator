@@ -15,6 +15,7 @@ import {
     SecondaryEducationPlaceholderData,
     WorkExperiencePlaceholderData,
 } from "../../../placeholder-data/state-placeholder-data";
+import { produce } from "immer";
 
 interface FormEditSectionProps {
     personalDetails: PersonalDetails | null;
@@ -47,10 +48,19 @@ export const FormEditSection = ({
 }: FormEditSectionProps) => {
     // remove form state of all their data
     const wipeAllForms = () => {
-        setPersonalDetails(null);
-        setPrimaryEducation(null);
-        setSecondaryEducation(null);
-        setWorkExperience(null);
+        setPersonalDetails(
+            produce((draft) => {
+                if (draft == null) return;
+                (Object.keys(draft) as (keyof PersonalDetails)[]).forEach(
+                    (key) => {
+                        draft[key] = "";
+                    }
+                );
+            })
+        );
+        setPrimaryEducation({});
+        setSecondaryEducation({});
+        setWorkExperience({});
     };
 
     // populate form state with placeholder data
