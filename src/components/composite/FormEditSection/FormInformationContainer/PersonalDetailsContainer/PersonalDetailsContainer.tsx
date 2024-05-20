@@ -5,10 +5,8 @@ import { ChangeEvent } from "react";
 import { produce } from "immer";
 
 interface PersonalDetailsContainerProps {
-    personalDetails: PersonalDetails | null;
-    setPersonalDetails: React.Dispatch<
-        React.SetStateAction<PersonalDetails | null>
-    >;
+    personalDetails: PersonalDetails;
+    setPersonalDetails: React.Dispatch<React.SetStateAction<PersonalDetails>>;
 }
 
 export const PersonalDetailsContainer = ({
