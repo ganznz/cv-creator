@@ -1,6 +1,6 @@
 import Button, { ButtonProps } from "../Buttons/Button";
 
-interface DropdownItemProps extends ButtonProps {
+export interface DropdownItemProps extends ButtonProps {
     name: string;
 }
 
