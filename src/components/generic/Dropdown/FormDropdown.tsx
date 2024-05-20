@@ -1,21 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ExpandableDropdown, {
     ExpandableDropdownProps,
 } from "./ExpandableDropdown";
 import Form from "../Form/Form";
 import Button from "../Buttons/Button";
 import { DropdownItemProps } from "./DropdownItem";
+import Input from "../Inputs/Input";
 
-interface FormDropdownProps extends ExpandableDropdownProps {}
+interface FormDropdownProps<T, K> extends ExpandableDropdownProps {
+    dropdownData: Record<string, T>; // all the data that is used for each <DropdownItem />'s form
+    setDropdownData: React.Dispatch<React.SetStateAction<{ [k: string]: K }>>;
+}
 
-export default function FormDropdown({
+export default function FormDropdown<T, K>({
     children,
+    dropdownData,
+    setDropdownData,
     ...props
-}: FormDropdownProps) {
+}: FormDropdownProps<T, K>) {
     const [visibleForm, setVisibleForm] = useState("");
 
-    // if visibleForm exists and expanded prop is true, show the form
-    visibleForm && { ...props }.expanded && <Form></Form>;
+    const isExpanded = { ...props }.expanded;
+
+    // visibleForm should only have a valid value if the dropdown is expanded
+    useEffect(() => {
+        !isExpanded && setVisibleForm("");
+    }, [isExpanded]);
+
+    // if visibleForm exists, show the form
+    const formData = Object.keys(dropdownData).filter(
+        (formName) => formName == visibleForm
+    );
+    if (visibleForm) {
+        return (
+            <Form>
+                {formData.map((inputName, i) => (
+                    <Input label={inputName} key={i} />
+                ))}
+            </Form>
+        );
+    }
 
     // else, render dropdown
     return (
