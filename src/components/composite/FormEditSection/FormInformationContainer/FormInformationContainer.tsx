@@ -8,24 +8,21 @@ import {
     SecondaryEducation,
     WorkExperience,
 } from "../../../../models/state-models";
-import { produce } from "immer";
 
 interface FormInformationContainerProps {
-    personalDetails: PersonalDetails | null;
-    primaryEducation: { [k: string]: PrimaryEducation } | null;
-    secondaryEducation: { [k: string]: SecondaryEducation } | null;
-    workExperience: { [k: string]: WorkExperience } | null;
-    setPersonalDetails: React.Dispatch<
-        React.SetStateAction<PersonalDetails | null>
-    >;
+    personalDetails: PersonalDetails;
+    primaryEducation: { [k: string]: PrimaryEducation };
+    secondaryEducation: { [k: string]: SecondaryEducation };
+    workExperience: { [k: string]: WorkExperience };
+    setPersonalDetails: React.Dispatch<React.SetStateAction<PersonalDetails>>;
     setPrimaryEducation: React.Dispatch<
-        React.SetStateAction<{ [k: string]: PrimaryEducation } | null>
+        React.SetStateAction<{ [k: string]: PrimaryEducation }>
     >;
     setSecondaryEducation: React.Dispatch<
-        React.SetStateAction<{ [k: string]: SecondaryEducation } | null>
+        React.SetStateAction<{ [k: string]: SecondaryEducation }>
     >;
     setWorkExperience: React.Dispatch<
-        React.SetStateAction<{ [k: string]: WorkExperience } | null>
+        React.SetStateAction<{ [k: string]: WorkExperience }>
     >;
 }
 
@@ -51,65 +48,77 @@ export const FormInformationContainer = ({
                 setPersonalDetails={setPersonalDetails}
             ></PersonalDetailsContainer>
 
-            {primaryEducation && (
-                <FormDropdown
-                    name="Primary Education"
-                    onClick={() =>
-                        setActiveDropdown(
-                            activeDropdown === "primaryEducation"
-                                ? null
-                                : "primaryEducation"
-                        )
-                    }
-                    expanded={activeDropdown === "primaryEducation"}
-                >
-                    {Object.keys(primaryEducation).map(
-                        (primaryInstitutionName) => (
-                            <DropdownItem name={primaryInstitutionName} />
-                        )
-                    )}
-                </FormDropdown>
-            )}
+            <FormDropdown
+                name="Primary Education"
+                icon={<i className="fa-solid fa-child"></i>}
+                onClick={() =>
+                    setActiveDropdown(
+                        activeDropdown === "primaryEducation"
+                            ? null
+                            : "primaryEducation"
+                    )
+                }
+                expanded={activeDropdown === "primaryEducation"}
+                dropdownData={primaryEducation}
+                setDropdownData={setPrimaryEducation}
+            >
+                {Object.keys(primaryEducation).map(
+                    (primaryInstitutionName, index) => (
+                        <DropdownItem
+                            name={primaryInstitutionName}
+                            key={index}
+                        />
+                    )
+                )}
+            </FormDropdown>
 
-            {secondaryEducation && (
-                <FormDropdown
-                    name="Secondary Education"
-                    onClick={() =>
-                        setActiveDropdown(
-                            activeDropdown === "secondaryEducation"
-                                ? null
-                                : "secondaryEducation"
-                        )
-                    }
-                    expanded={activeDropdown === "secondaryEducation"}
-                >
-                    {Object.keys(secondaryEducation).map(
-                        (secondaryInstitutionName) => (
-                            <DropdownItem name={secondaryInstitutionName} />
-                        )
-                    )}
-                </FormDropdown>
-            )}
+            <FormDropdown
+                name="Secondary Education"
+                icon={<i className="fa-solid fa-user-graduate"></i>}
+                onClick={() =>
+                    setActiveDropdown(
+                        activeDropdown === "secondaryEducation"
+                            ? null
+                            : "secondaryEducation"
+                    )
+                }
+                expanded={activeDropdown === "secondaryEducation"}
+                dropdownData={secondaryEducation}
+                setDropdownData={setSecondaryEducation}
+            >
+                {Object.keys(secondaryEducation).map(
+                    (secondaryInstitutionName, index) => (
+                        <DropdownItem
+                            name={secondaryInstitutionName}
+                            key={index}
+                        />
+                    )
+                )}
+            </FormDropdown>
 
-            {workExperience && (
-                <FormDropdown
-                    name="Work Experience"
-                    onClick={() =>
-                        setActiveDropdown(
-                            activeDropdown === "workExperience"
-                                ? null
-                                : "workExperience"
-                        )
-                    }
-                    expanded={activeDropdown === "workExperience"}
-                >
-                    {Object.keys(workExperience).map(
-                        (secondaryInstitutionName) => (
-                            <DropdownItem name={secondaryInstitutionName} />
-                        )
-                    )}
-                </FormDropdown>
-            )}
+            <FormDropdown
+                name="Work Experience"
+                icon={<i className="fa-solid fa-briefcase"></i>}
+                onClick={() =>
+                    setActiveDropdown(
+                        activeDropdown === "workExperience"
+                            ? null
+                            : "workExperience"
+                    )
+                }
+                expanded={activeDropdown === "workExperience"}
+                dropdownData={workExperience}
+                setDropdownData={setWorkExperience}
+            >
+                {Object.keys(workExperience).map(
+                    (secondaryInstitutionName, index) => (
+                        <DropdownItem
+                            name={secondaryInstitutionName}
+                            key={index}
+                        />
+                    )
+                )}
+            </FormDropdown>
         </div>
     );
 };
