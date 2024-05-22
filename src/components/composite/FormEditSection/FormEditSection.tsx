@@ -18,21 +18,19 @@ import {
 import { produce } from "immer";
 
 interface FormEditSectionProps {
-    personalDetails: PersonalDetails | null;
-    primaryEducation: { [k: string]: PrimaryEducation } | null;
-    secondaryEducation: { [k: string]: SecondaryEducation } | null;
-    workExperience: { [k: string]: WorkExperience } | null;
-    setPersonalDetails: React.Dispatch<
-        React.SetStateAction<PersonalDetails | null>
-    >;
+    personalDetails: PersonalDetails;
+    primaryEducation: { [k: string]: PrimaryEducation };
+    secondaryEducation: { [k: string]: SecondaryEducation };
+    workExperience: { [k: string]: WorkExperience };
+    setPersonalDetails: React.Dispatch<React.SetStateAction<PersonalDetails>>;
     setPrimaryEducation: React.Dispatch<
-        React.SetStateAction<{ [k: string]: PrimaryEducation } | null>
+        React.SetStateAction<{ [k: string]: PrimaryEducation }>
     >;
     setSecondaryEducation: React.Dispatch<
-        React.SetStateAction<{ [k: string]: SecondaryEducation } | null>
+        React.SetStateAction<{ [k: string]: SecondaryEducation }>
     >;
     setWorkExperience: React.Dispatch<
-        React.SetStateAction<{ [k: string]: WorkExperience } | null>
+        React.SetStateAction<{ [k: string]: WorkExperience }>
     >;
 }
 
@@ -67,15 +65,15 @@ export const FormEditSection = ({
     const populateAllForms = () => {
         setPersonalDetails(PersonalDetailsPlaceholderData);
         setPrimaryEducation({
-            [PrimaryEducationPlaceholderData.InstituteName]:
+            [PrimaryEducationPlaceholderData["Institute Name"]]:
                 PrimaryEducationPlaceholderData,
         });
         setSecondaryEducation({
-            [SecondaryEducationPlaceholderData.InstituteName]:
+            [SecondaryEducationPlaceholderData["Institute Name"]]:
                 SecondaryEducationPlaceholderData,
         });
         setWorkExperience({
-            [WorkExperiencePlaceholderData.JobName]:
+            [WorkExperiencePlaceholderData["Job Name"]]:
                 WorkExperiencePlaceholderData,
         });
     };
