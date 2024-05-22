@@ -27,15 +27,12 @@ export default function FormDropdown<T, K>({
         !isExpanded && setVisibleForm("");
     }, [isExpanded]);
 
-    // if visibleForm exists, show the form
-    const formData = Object.keys(dropdownData).filter(
-        (formName) => formName == visibleForm
-    );
+    const formData = dropdownData[visibleForm] || {};
     if (visibleForm) {
         return (
             <Form>
-                {formData.map((inputName, i) => (
-                    <Input label={inputName} key={i} />
+                {Object.keys(formData).map((dataKey, i) => (
+                    <Input label={dataKey} key={i} />
                 ))}
             </Form>
         );
