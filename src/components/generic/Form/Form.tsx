@@ -8,7 +8,7 @@ interface FormProps extends ComponentPropsWithoutRef<"form"> {
 
 export default function Form({ children, ...props }: FormProps) {
     return (
-        <Panel classes={[padding4]}>
+        <Panel className={padding4}>
             <form action="/" {...props}>
                 {children}
             </form>

@@ -85,7 +85,7 @@ export const FormEditSection = ({
 
     return (
         <div className={`h-full flex ${gap6} sticky top-[30px]`}>
-            <Navbar direction="vertical" classes={["self-start"]}>
+            <Navbar direction="vertical" className="self-start">
                 <Button
                     visibleHover={true}
                     isActive={activePanel == "content"}
@@ -109,7 +109,7 @@ export const FormEditSection = ({
             </Navbar>
 
             <div className={`w-[20rem] flex flex-col items-center ${gap6}`}>
-                <Navbar direction="horizontal" classes={["w-full"]}>
+                <Navbar direction="horizontal" className="w-full">
                     <Button
                         variant="success"
                         visibleHover={true}
