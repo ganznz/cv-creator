@@ -1,4 +1,5 @@
 import Button from "../Buttons/Button";
+import Panel from "../Panel";
 
 export interface ExpandableDropdownProps {
     children: React.ReactNode;
@@ -16,7 +17,7 @@ export default function ExpandableDropdown({
     onClick,
 }: ExpandableDropdownProps) {
     return (
-        <div className="flex flex-col">
+        <Panel className="flex flex-col">
             <Button onClick={onClick}>
                 {icon}
                 <h1>{name}</h1>
@@ -27,6 +28,6 @@ export default function ExpandableDropdown({
                     <ul className="flex flex-col">{children}</ul>
                 </div>
             )}
-        </div>
+        </Panel>
     );
 }
