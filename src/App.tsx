@@ -16,27 +16,29 @@ import { FormEditSection } from "./components/composite/FormEditSection/FormEdit
 import { CvPageContainer } from "./components/composite/CvPageContainer/CvPageContainer";
 
 function App() {
-    const [personalDetails, setPersonalDetails] =
-        useState<PersonalDetails | null>(PersonalDetailsPlaceholderData);
+    const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
+        PersonalDetailsPlaceholderData
+    );
 
     const [primaryEducation, setPrimaryEducation] = useState<{
         [k: string]: PrimaryEducation;
-    } | null>({
-        [PrimaryEducationPlaceholderData.InstituteName]:
+    }>({
+        [PrimaryEducationPlaceholderData["Institute Name"]]:
             PrimaryEducationPlaceholderData,
     });
 
     const [secondaryEducation, setSecondaryEducation] = useState<{
         [k: string]: SecondaryEducation;
-    } | null>({
-        [SecondaryEducationPlaceholderData.InstituteName]:
+    }>({
+        [SecondaryEducationPlaceholderData["Institute Name"]]:
             SecondaryEducationPlaceholderData,
     });
 
     const [workExperience, setWorkExperience] = useState<{
         [k: string]: WorkExperience;
-    } | null>({
-        [WorkExperiencePlaceholderData.JobName]: WorkExperiencePlaceholderData,
+    }>({
+        [WorkExperiencePlaceholderData["Job Name"]]:
+            WorkExperiencePlaceholderData,
     });
 
     return (
