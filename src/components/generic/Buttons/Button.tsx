@@ -1,5 +1,4 @@
 import { ComponentProps } from "react";
-import { TailwindUtilityClasses } from "../../types/GenericTypes";
 import { twMerge } from "tailwind-merge";
 import { padding2 } from "../../../constants/tailwind-utility-classes";
 
@@ -9,15 +8,14 @@ export interface ButtonProps extends ComponentProps<"button"> {
     isActive?: boolean;
     visibleHover?: boolean;
     visibleBackground?: boolean;
-    classes?: TailwindUtilityClasses;
 }
 
 const PrimaryButton = ({
     children,
-    classes,
     isActive,
     visibleHover,
     visibleBackground,
+    className,
     ...props
 }: ButtonProps) => {
     return (
@@ -28,7 +26,7 @@ const PrimaryButton = ({
                     ((visibleBackground || isActive) && "bg-gray-300") ||
                     "bg-white"
                 } text-grey`,
-                classes?.join(" ")
+                className
             )}
             {...props}
         >
@@ -39,10 +37,10 @@ const PrimaryButton = ({
 
 const InfoButton = ({
     children,
-    classes,
     isActive,
     visibleHover,
     visibleBackground,
+    className,
     ...props
 }: ButtonProps) => {
     return (
@@ -53,7 +51,7 @@ const InfoButton = ({
                     ((visibleBackground || isActive) && "bg-blue-100") ||
                     "bg-white"
                 } text-blue-700`,
-                classes?.join(" ")
+                className
             )}
             {...props}
         >
@@ -64,10 +62,10 @@ const InfoButton = ({
 
 const SuccessButton = ({
     children,
-    classes,
     isActive,
     visibleHover,
     visibleBackground,
+    className,
     ...props
 }: ButtonProps) => {
     return (
@@ -78,7 +76,7 @@ const SuccessButton = ({
                     ((visibleBackground || isActive) && "bg-green-100") ||
                     "bg-white"
                 } text-green-700`,
-                classes?.join(" ")
+                className
             )}
             {...props}
         >
@@ -89,10 +87,10 @@ const SuccessButton = ({
 
 const WarnButton = ({
     children,
-    classes,
     isActive,
     visibleHover,
     visibleBackground,
+    className,
     ...props
 }: ButtonProps) => {
     return (
@@ -103,7 +101,7 @@ const WarnButton = ({
                     ((visibleBackground || isActive) && "bg-red-100") ||
                     "bg-white"
                 } text-red-700`,
-                classes?.join(" ")
+                className
             )}
             {...props}
         >
@@ -118,25 +116,18 @@ export default function Button({
     isActive,
     visibleHover = false,
     visibleBackground = false,
-    classes,
     ...props
 }: ButtonProps) {
-    const defaultClasses = [
-        "flex",
-        "flex-1",
-        "justify-center",
-        "content-center",
-        "transition-colors",
-        "rounded",
-        `${padding2}`,
-    ];
-    classes = (classes && defaultClasses.concat(classes)) || defaultClasses;
+    let classes = `flex flex-1 justify-center content-center transition-colors rounded ${padding2}`;
+    classes = { ...props }.className
+        ? `${classes} ${{ ...props }.className}`
+        : classes;
 
     switch (variant) {
         case "primary":
             return (
                 <PrimaryButton
-                    classes={classes}
+                    className={classes}
                     isActive={isActive}
                     visibleHover={visibleHover}
                     visibleBackground={visibleBackground}
@@ -148,7 +139,7 @@ export default function Button({
         case "info":
             return (
                 <InfoButton
-                    classes={classes}
+                    className={classes}
                     isActive={isActive}
                     visibleHover={visibleHover}
                     visibleBackground={visibleBackground}
@@ -160,7 +151,7 @@ export default function Button({
         case "success":
             return (
                 <SuccessButton
-                    classes={classes}
+                    className={classes}
                     isActive={isActive}
                     visibleHover={visibleHover}
                     visibleBackground={visibleBackground}
@@ -172,7 +163,7 @@ export default function Button({
         case "warn":
             return (
                 <WarnButton
-                    classes={classes}
+                    className={classes}
                     isActive={isActive}
                     visibleHover={visibleHover}
                     visibleBackground={visibleBackground}
