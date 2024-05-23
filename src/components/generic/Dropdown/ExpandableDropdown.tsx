@@ -20,11 +20,11 @@ export default function ExpandableDropdown({
         <Panel className="flex flex-col">
             <Button onClick={onClick}>
                 {icon}
-                <h1>{name}</h1>
+                <h1 className="font-bold text-xl">{name}</h1>
             </Button>
 
             {expanded && (
-                <div>
+                <div className="mt-2">
                     <ul className="flex flex-col">{children}</ul>
                 </div>
             )}

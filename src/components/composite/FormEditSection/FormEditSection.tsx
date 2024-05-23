@@ -82,7 +82,7 @@ export const FormEditSection = ({
     const [activePanel, setActiveWindow] = useState("content");
 
     return (
-        <div className={`h-full flex ${gap6} sticky top-[30px]`}>
+        <div className={`h-full flex ${gap6}`}>
             <Navbar direction="vertical" className="self-start">
                 <Button
                     visibleHover={true}
@@ -121,7 +121,7 @@ export const FormEditSection = ({
                         visibleHover={true}
                         onClick={wipeAllForms}
                     >
-                        <span className="flex gap-2 justify-center content-center">
+                        <span className="flex justify-center content-center">
                             <i className="fa-solid fa-user"></i>
                             Clear Resume
                         </span>

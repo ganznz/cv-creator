@@ -42,7 +42,7 @@ function App() {
     });
 
     return (
-        <div className={`flex justify-center gap-10`}>
+        <div className={`flex justify-center gap-10 p-7`}>
             <FormEditSection
                 personalDetails={personalDetails}
                 primaryEducation={primaryEducation}

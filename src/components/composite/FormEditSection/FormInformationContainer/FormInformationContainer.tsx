@@ -8,6 +8,7 @@ import {
     SecondaryEducation,
     WorkExperience,
 } from "../../../../models/state-models";
+import { gap6 } from "../../../../constants/tailwind-utility-classes";
 
 interface FormInformationContainerProps {
     personalDetails: PersonalDetails;
@@ -41,7 +42,7 @@ export const FormInformationContainer = ({
     >(null);
 
     return (
-        <div className="flex flex-col w-full">
+        <div className={`flex flex-col w-full ${gap6}`}>
             {/* personal details form */}
             <PersonalDetailsContainer
                 personalDetails={personalDetails}

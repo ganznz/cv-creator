@@ -51,7 +51,7 @@ export default function FormDropdown<T, K>({
                     });
                 }
             })}
-            <div className="flex justify-center items-center">
+            <div className="flex justify-center items-center mt-2">
                 <Button variant="success" visibleHover={true}>
                     <i className="fa-solid fa-plus"></i>
                     {{ ...props }.name}
