@@ -22,7 +22,7 @@ const PrimaryButton = ({
         <button
             type="button"
             className={twMerge(
-                `${visibleHover && !isActive && "hover:bg-gray-200"} ${
+                `${(visibleHover && !isActive && "hover:bg-gray-200") || ""} ${
                     ((visibleBackground || isActive) && "bg-gray-300") ||
                     "bg-white"
                 } text-grey`,
@@ -47,7 +47,7 @@ const InfoButton = ({
         <button
             type="button"
             className={twMerge(
-                `${(visibleHover || !isActive) && "hover:bg-blue-200"} ${
+                `${(visibleHover && !isActive && "hover:bg-blue-200") || ""} ${
                     ((visibleBackground || isActive) && "bg-blue-100") ||
                     "bg-white"
                 } text-blue-700`,
@@ -72,7 +72,7 @@ const SuccessButton = ({
         <button
             type="button"
             className={twMerge(
-                `${(visibleHover || !isActive) && "hover:bg-green-200"} ${
+                `${(visibleHover && !isActive && "hover:bg-green-200") || ""} ${
                     ((visibleBackground || isActive) && "bg-green-100") ||
                     "bg-white"
                 } text-green-700`,
@@ -97,7 +97,7 @@ const WarnButton = ({
         <button
             type="button"
             className={twMerge(
-                `${(visibleHover || !isActive) && "hover:bg-red-200"} ${
+                `${(visibleHover && !isActive && "hover:bg-red-200") || ""} ${
                     ((visibleBackground || isActive) && "bg-red-100") ||
                     "bg-white"
                 } text-red-700`,
@@ -116,12 +116,11 @@ export default function Button({
     isActive,
     visibleHover = false,
     visibleBackground = false,
+    className,
     ...props
 }: ButtonProps) {
     let classes = `flex flex-1 justify-center content-center transition-colors rounded ${padding2}`;
-    classes = { ...props }.className
-        ? `${classes} ${{ ...props }.className}`
-        : classes;
+    classes = className ? twMerge(classes, className) : classes;
 
     switch (variant) {
         case "primary":
