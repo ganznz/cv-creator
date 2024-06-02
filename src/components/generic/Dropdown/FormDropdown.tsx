@@ -7,18 +7,20 @@ import Button from "../Buttons/Button";
 import { DropdownItemProps } from "./DropdownItem";
 import Input from "../Inputs/Input";
 
-interface FormDropdownProps<T, K> extends ExpandableDropdownProps {
-    dropdownData: Record<string, T>; // all the data that is used for each <DropdownItem />'s form
-    setDropdownData: React.Dispatch<React.SetStateAction<{ [k: string]: K }>>;
+interface FormDropdownProps<T extends { [key: string]: any }>
+    extends ExpandableDropdownProps {
+    dropdownData: { [k: string]: T }; // all the data that is used for each <DropdownItem />'s form
+    setDropdownData: React.Dispatch<React.SetStateAction<{ [k: string]: T }>>;
 }
 
-export default function FormDropdown<T, K>({
+export default function FormDropdown<T extends { [key: string]: any }>({
     children,
     dropdownData,
     setDropdownData,
     ...props
-}: FormDropdownProps<T, K>) {
-    const [visibleForm, setVisibleForm] = useState("");
+}: FormDropdownProps<T>) {
+    const [visibleForm, setVisibleForm] =
+        useState<keyof typeof dropdownData>("");
 
     const isExpanded = { ...props }.expanded;
 
@@ -27,12 +29,13 @@ export default function FormDropdown<T, K>({
         !isExpanded && setVisibleForm("");
     }, [isExpanded]);
 
-    const formData = dropdownData[visibleForm] || {};
-    if (visibleForm) {
+    const formData: T = dropdownData[visibleForm];
+    if (visibleForm && formData) {
         return (
-            <Form>
-                {Object.keys(formData).map((dataKey, i) => (
-                    <Input label={dataKey} key={i} />
+            <Form className="flex flex-col gap-3">
+                <h1 className={"text-xl font-bold"}>{visibleForm}</h1>
+                {Object.keys(formData).map((dataKey: string, i) => (
+                    <Input label={dataKey} key={i} value={formData[dataKey]} />
                 ))}
             </Form>
         );
