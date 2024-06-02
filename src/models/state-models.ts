@@ -8,7 +8,7 @@ export interface PersonalDetails {
 interface GenericDetails {
     City: string;
     Country: string;
-    Timeline: number | number[]; // e.g. 2022 (2022 - present) or [2011, 2014] (between 2011 to 2014)
+    Timeline: string | string[]; // e.g. 2022 (2022 - present) or [2011, 2014] (between 2011 to 2014)
     Details?: string;
 }
 
