@@ -5,14 +5,21 @@ export interface DropdownItemProps extends ButtonProps {
 }
 
 export default function DropdownItem({ name, ...props }: DropdownItemProps) {
-    let classes = "flex";
+    let classes = `flex -mx-2`;
     classes = { ...props }.className
         ? `${classes} ${{ ...props }.className}`
         : classes;
 
     return (
         <li className={classes}>
-            <Button {...props}>{name}</Button>
+            <Button
+                variant="info"
+                className={`rounded-none`}
+                visibleHover={true}
+                {...props}
+            >
+                {name}
+            </Button>
         </li>
     );
 }
