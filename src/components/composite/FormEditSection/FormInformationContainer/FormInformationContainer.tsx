@@ -74,7 +74,7 @@ export const FormInformationContainer = ({
             </FormDropdown>
 
             <FormDropdown
-                name="Secondary Education"
+                name="Tertiary Education"
                 icon={<i className="fa-solid fa-user-graduate"></i>}
                 onClick={() =>
                     setActiveDropdown(
