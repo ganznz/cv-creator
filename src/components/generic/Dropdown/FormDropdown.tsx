@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import ExpandableDropdown, {
     ExpandableDropdownProps,
 } from "./ExpandableDropdown";
@@ -6,6 +6,7 @@ import Form from "../Form/Form";
 import Button from "../Buttons/Button";
 import { DropdownItemProps } from "./DropdownItem";
 import Input from "../Inputs/Input";
+import { produce } from "immer";
 
 interface FormDropdownProps<T extends { [key: string]: any }>
     extends ExpandableDropdownProps {
@@ -24,6 +25,18 @@ export default function FormDropdown<T extends { [key: string]: any }>({
 
     const isExpanded = { ...props }.expanded;
 
+    const updateDropdownData = (e: ChangeEvent<HTMLInputElement>, key: any) => {
+        setDropdownData(
+            produce((draft) => {
+                // for some reason doing formData: T doesnt work - must be because of immer? so i just hardcoded the type
+                const formData: { [key: string]: any } = draft[visibleForm];
+                if (formData) {
+                    formData[key] = e.target.value;
+                }
+            })
+        );
+    };
+
     // visibleForm should only have a valid value if the dropdown is expanded
     useEffect(() => {
         !isExpanded && setVisibleForm("");
@@ -35,7 +48,12 @@ export default function FormDropdown<T extends { [key: string]: any }>({
             <Form className="flex flex-col gap-3">
                 <h1 className={"text-xl font-bold"}>{visibleForm}</h1>
                 {Object.keys(formData).map((dataKey: string, i) => (
-                    <Input label={dataKey} key={i} value={formData[dataKey]} />
+                    <Input
+                        label={dataKey}
+                        key={i}
+                        value={formData[dataKey]}
+                        onChange={(e) => updateDropdownData(e, dataKey)}
+                    />
                 ))}
             </Form>
         );
