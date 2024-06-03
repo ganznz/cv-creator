@@ -72,8 +72,8 @@ const SuccessButton = ({
         <button
             type="button"
             className={twMerge(
-                `${(visibleHover && !isActive && "hover:bg-green-200") || ""} ${
-                    ((visibleBackground || isActive) && "bg-green-100") ||
+                `${(visibleHover && !isActive && "hover:bg-green-300") || ""} ${
+                    ((visibleBackground || isActive) && "bg-green-200") ||
                     "bg-white"
                 } text-green-700`,
                 className
