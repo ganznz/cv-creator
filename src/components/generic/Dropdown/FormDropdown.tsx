@@ -12,12 +12,14 @@ interface FormDropdownProps<T extends { [key: string]: any }>
     extends ExpandableDropdownProps {
     dropdownData: { [k: string]: T }; // all the data that is used for each <DropdownItem />'s form
     setDropdownData: React.Dispatch<React.SetStateAction<{ [k: string]: T }>>;
+    onShrink?: () => void;
 }
 
 export default function FormDropdown<T extends { [key: string]: any }>({
     children,
     dropdownData,
     setDropdownData,
+    onShrink,
     ...props
 }: FormDropdownProps<T>) {
     const [visibleForm, setVisibleForm] =
@@ -55,6 +57,15 @@ export default function FormDropdown<T extends { [key: string]: any }>({
                         onChange={(e) => updateDropdownData(e, dataKey)}
                     />
                 ))}
+                <Button
+                    className="mt-5"
+                    variant="success"
+                    visibleBackground={true}
+                    visibleHover={true}
+                    onClick={onShrink}
+                >
+                    Back
+                </Button>
             </Form>
         );
     }

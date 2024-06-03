@@ -9,6 +9,7 @@ import {
     WorkExperience,
 } from "../../../../models/state-models";
 import { gap6 } from "../../../../constants/tailwind-utility-classes";
+import Button from "../../../generic/Buttons/Button";
 
 interface FormInformationContainerProps {
     personalDetails: PersonalDetails;
@@ -62,13 +63,16 @@ export const FormInformationContainer = ({
                 expanded={activeDropdown === "primaryEducation"}
                 dropdownData={primaryEducation}
                 setDropdownData={setPrimaryEducation}
+                onShrink={() => {
+                    setActiveDropdown(null);
+                    setTimeout(() => setActiveDropdown("primaryEducation"), 0);
+                }}
             >
                 {Object.keys(primaryEducation).map(
                     (primaryInstitutionName, index) => (
-                        <DropdownItem
-                            name={primaryInstitutionName}
-                            key={index}
-                        />
+                        <DropdownItem key={index} name={primaryInstitutionName}>
+                            {primaryInstitutionName}
+                        </DropdownItem>
                     )
                 )}
             </FormDropdown>
@@ -86,13 +90,22 @@ export const FormInformationContainer = ({
                 expanded={activeDropdown === "secondaryEducation"}
                 dropdownData={secondaryEducation}
                 setDropdownData={setSecondaryEducation}
+                onShrink={() => {
+                    setActiveDropdown(null);
+                    setTimeout(
+                        () => setActiveDropdown("secondaryEducation"),
+                        0
+                    );
+                }}
             >
                 {Object.keys(secondaryEducation).map(
                     (secondaryInstitutionName, index) => (
                         <DropdownItem
-                            name={secondaryInstitutionName}
                             key={index}
-                        />
+                            name={secondaryInstitutionName}
+                        >
+                            {secondaryInstitutionName}
+                        </DropdownItem>
                     )
                 )}
             </FormDropdown>
@@ -110,13 +123,35 @@ export const FormInformationContainer = ({
                 expanded={activeDropdown === "workExperience"}
                 dropdownData={workExperience}
                 setDropdownData={setWorkExperience}
+                onShrink={() => {
+                    setActiveDropdown(null);
+                    setTimeout(() => setActiveDropdown("workExperience"), 0);
+                }}
             >
                 {Object.keys(workExperience).map(
                     (secondaryInstitutionName, index) => (
                         <DropdownItem
-                            name={secondaryInstitutionName}
                             key={index}
-                        />
+                            name={secondaryInstitutionName}
+                        >
+                            {/* interaction btn container for the dropdown item */}
+                            <div className="flex absolute right-0">
+                                <Button
+                                    variant="success"
+                                    visibleHover={true}
+                                    className="bg-transparent rounded-none"
+                                >
+                                    <i className="fa-solid fa-eye"></i>
+                                </Button>
+                                <Button
+                                    variant="warn"
+                                    visibleHover={true}
+                                    className="bg-transparent rounded-none"
+                                >
+                                    <i className="fa-solid fa-trash"></i>
+                                </Button>
+                            </div>
+                        </DropdownItem>
                     )
                 )}
             </FormDropdown>
