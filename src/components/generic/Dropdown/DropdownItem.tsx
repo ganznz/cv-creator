@@ -1,10 +1,15 @@
 import Button, { ButtonProps } from "../Buttons/Button";
 
 export interface DropdownItemProps extends ButtonProps {
+    children?: React.ReactNode;
     name: string;
 }
 
-export default function DropdownItem({ name, ...props }: DropdownItemProps) {
+export default function DropdownItem({
+    children,
+    name,
+    ...props
+}: DropdownItemProps) {
     let classes = `flex -mx-2`;
     classes = { ...props }.className
         ? `${classes} ${{ ...props }.className}`
@@ -20,6 +25,7 @@ export default function DropdownItem({ name, ...props }: DropdownItemProps) {
             >
                 {name}
             </Button>
+            {children}
         </li>
     );
 }
