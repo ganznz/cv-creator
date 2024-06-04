@@ -1,12 +1,18 @@
 import { ComponentPropsWithoutRef } from "react";
 import { padding1 } from "../../../constants/tailwind-utility-classes";
+import { twMerge } from "tailwind-merge";
 
 interface InputProps extends ComponentPropsWithoutRef<"input"> {
     label?: string;
     description?: string;
 }
 
-export default function Input({ label, description, ...props }: InputProps) {
+export default function Input({
+    label,
+    description,
+    className,
+    ...props
+}: InputProps) {
     const defaultClasses = [
         `${padding1}`,
         "bg-gray-200",
@@ -19,6 +25,9 @@ export default function Input({ label, description, ...props }: InputProps) {
         "focus:ring-[#4b8bfa]",
         "focus:drop-shadow-lg",
     ];
+    const classes = className
+        ? twMerge(defaultClasses.join(" "), className)
+        : defaultClasses.join(" ");
 
     return (
         <>
@@ -34,7 +43,7 @@ export default function Input({ label, description, ...props }: InputProps) {
                     </p>
                 )}
             </span>
-            <input className={defaultClasses.join(" ")} {...props} />
+            <input className={classes} {...props} />
         </>
     );
 }
