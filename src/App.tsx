@@ -23,22 +23,21 @@ function App() {
     const [primaryEducation, setPrimaryEducation] = useState<{
         [k: string]: PrimaryEducation;
     }>({
-        [PrimaryEducationPlaceholderData["Institute Name"]]:
+        [PrimaryEducationPlaceholderData["Name"]]:
             PrimaryEducationPlaceholderData,
     });
 
     const [secondaryEducation, setSecondaryEducation] = useState<{
         [k: string]: SecondaryEducation;
     }>({
-        [SecondaryEducationPlaceholderData["Institute Name"]]:
+        [SecondaryEducationPlaceholderData["Name"]]:
             SecondaryEducationPlaceholderData,
     });
 
     const [workExperience, setWorkExperience] = useState<{
         [k: string]: WorkExperience;
     }>({
-        [WorkExperiencePlaceholderData["Job Name"]]:
-            WorkExperiencePlaceholderData,
+        [WorkExperiencePlaceholderData["Name"]]: WorkExperiencePlaceholderData,
     });
 
     return (

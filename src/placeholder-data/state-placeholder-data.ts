@@ -13,24 +13,24 @@ export const PersonalDetailsPlaceholderData: PersonalDetails = {
 } as const;
 
 export const PrimaryEducationPlaceholderData: PrimaryEducation = {
+    Name: "Takapuna Grammar School",
     City: "Auckland",
     Country: "New Zealand",
-    ["Institute Name"]: "Takapuna Grammar School",
-    Timeline: [2016, 2020],
+    Timeline: ["2016", "2020"],
 } as const;
 
 export const SecondaryEducationPlaceholderData: SecondaryEducation = {
+    Name: "University of Auckland",
     City: "Auckland",
     Country: "New Zealand",
-    ["Institute Name"]: "University of Auckland",
-    Timeline: 2022,
+    Timeline: "2022",
     Qualification: "Computer Science",
 } as const;
 
 export const WorkExperiencePlaceholderData: WorkExperience = {
+    Name: "Pimping Hoes",
     City: "Bucharest",
     Country: "Romania",
-    Timeline: 2002,
+    Timeline: "2002",
     Workplace: "Hustlers University",
-    ["Job Name"]: "Big Time Pimpin'",
 } as const;
