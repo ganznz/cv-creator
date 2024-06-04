@@ -13,7 +13,7 @@ interface GenericDetails {
 }
 
 export interface PrimaryEducation extends GenericDetails {
-    ["Institute Name"]: string;
+    Name: string;
 }
 
 export interface SecondaryEducation extends PrimaryEducation {
@@ -22,11 +22,11 @@ export interface SecondaryEducation extends PrimaryEducation {
 }
 
 export interface WorkExperience extends GenericDetails {
-    ["Job Name"]: string;
+    Name: string;
     Workplace: string;
 }
 
 export interface PersonalSkill {
-    Skill: string;
+    Name: string;
     Details: string;
 }
