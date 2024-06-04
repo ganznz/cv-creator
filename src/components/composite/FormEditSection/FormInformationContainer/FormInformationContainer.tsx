@@ -70,9 +70,11 @@ export const FormInformationContainer = ({
             >
                 {Object.keys(primaryEducation).map(
                     (primaryInstitutionName, index) => (
-                        <DropdownItem key={index} name={primaryInstitutionName}>
-                            {primaryInstitutionName}
-                        </DropdownItem>
+                        <DropdownItem
+                            key={index}
+                            dataName={primaryInstitutionName}
+                            name={primaryEducation[primaryInstitutionName].Name}
+                        />
                     )
                 )}
             </FormDropdown>
@@ -102,10 +104,12 @@ export const FormInformationContainer = ({
                     (secondaryInstitutionName, index) => (
                         <DropdownItem
                             key={index}
-                            name={secondaryInstitutionName}
-                        >
-                            {secondaryInstitutionName}
-                        </DropdownItem>
+                            dataName={secondaryInstitutionName}
+                            name={
+                                secondaryEducation[secondaryInstitutionName]
+                                    .Name
+                            }
+                        />
                     )
                 )}
             </FormDropdown>
@@ -128,32 +132,31 @@ export const FormInformationContainer = ({
                     setTimeout(() => setActiveDropdown("workExperience"), 0);
                 }}
             >
-                {Object.keys(workExperience).map(
-                    (secondaryInstitutionName, index) => (
-                        <DropdownItem
-                            key={index}
-                            name={secondaryInstitutionName}
-                        >
-                            {/* interaction btn container for the dropdown item */}
-                            <div className="flex absolute right-0">
-                                <Button
-                                    variant="success"
-                                    visibleHover={true}
-                                    className="bg-transparent rounded-none"
-                                >
-                                    <i className="fa-solid fa-eye"></i>
-                                </Button>
-                                <Button
-                                    variant="warn"
-                                    visibleHover={true}
-                                    className="bg-transparent rounded-none"
-                                >
-                                    <i className="fa-solid fa-trash"></i>
-                                </Button>
-                            </div>
-                        </DropdownItem>
-                    )
-                )}
+                {Object.keys(workExperience).map((workplace, index) => (
+                    <DropdownItem
+                        key={index}
+                        dataName={workplace}
+                        name={workExperience[workplace].Name}
+                    >
+                        {/* interaction btn container for the dropdown item */}
+                        <div className="flex absolute right-0 gap-2">
+                            <Button
+                                variant="success"
+                                visibleHover={true}
+                                className="bg-transparent rounded-full"
+                            >
+                                <i className="fa-solid fa-eye"></i>
+                            </Button>
+                            <Button
+                                variant="warn"
+                                visibleHover={true}
+                                className="bg-transparent rounded-full"
+                            >
+                                <i className="fa-solid fa-trash"></i>
+                            </Button>
+                        </div>
+                    </DropdownItem>
+                ))}
             </FormDropdown>
         </div>
     );

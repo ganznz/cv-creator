@@ -30,7 +30,7 @@ export default function FormDropdown<T extends { [key: string]: any }>({
     const updateDropdownData = (e: ChangeEvent<HTMLInputElement>, key: any) => {
         setDropdownData(
             produce((draft) => {
-                // for some reason doing formData: T doesnt work - must be because of immer? so i just hardcoded the type
+                // doing formData: T doesnt work - because of immer? ended up hardcoding type
                 const formData: { [key: string]: any } = draft[visibleForm];
                 if (formData) {
                     formData[key] = e.target.value;
@@ -40,6 +40,7 @@ export default function FormDropdown<T extends { [key: string]: any }>({
     };
 
     // visibleForm should only have a valid value if the dropdown is expanded
+    // if visibleForm & formData exists, render form
     useEffect(() => {
         !isExpanded && setVisibleForm("");
     }, [isExpanded]);
@@ -48,15 +49,21 @@ export default function FormDropdown<T extends { [key: string]: any }>({
     if (visibleForm && formData) {
         return (
             <Form className="flex flex-col gap-3">
-                <h1 className={"text-xl font-bold"}>{visibleForm}</h1>
-                {Object.keys(formData).map((dataKey: string, i) => (
-                    <Input
-                        label={dataKey}
-                        key={i}
-                        value={formData[dataKey]}
-                        onChange={(e) => updateDropdownData(e, dataKey)}
-                    />
-                ))}
+                <Input
+                    className="focus:ring-0 bg-transparent font-bold text-2xl"
+                    value={formData["Name"]}
+                    onChange={(e) => updateDropdownData(e, "Name")}
+                />
+                {Object.keys(formData)
+                    .filter((key) => key !== "Name")
+                    .map((dataKey: string, i) => (
+                        <Input
+                            label={dataKey}
+                            key={i}
+                            value={formData[dataKey]}
+                            onChange={(e) => updateDropdownData(e, dataKey)}
+                        />
+                    ))}
                 <Button
                     className="mt-5"
                     variant="success"
@@ -77,8 +84,9 @@ export default function FormDropdown<T extends { [key: string]: any }>({
                 if (React.isValidElement<DropdownItemProps>(child)) {
                     return React.cloneElement(child, {
                         onClick: () => {
-                            if (visibleForm == child.props.name) return;
-                            setVisibleForm(child.props.name);
+                            const formName = child.props.dataName;
+                            if (visibleForm == formName) return;
+                            setVisibleForm(formName);
                         },
                     });
                 }
