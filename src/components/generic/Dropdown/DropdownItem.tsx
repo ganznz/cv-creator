@@ -3,6 +3,7 @@ import Button, { ButtonProps } from "../Buttons/Button";
 export interface DropdownItemProps extends ButtonProps {
     children?: React.ReactNode;
     name: string;
+    dataName: string;
 }
 
 export default function DropdownItem({
