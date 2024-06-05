@@ -8,8 +8,20 @@ import {
     SecondaryEducation,
     WorkExperience,
 } from "../../../../models/state-models";
+import {
+    PrimaryEducationPlaceholderData,
+    SecondaryEducationPlaceholderData,
+    WorkExperiencePlaceholderData,
+} from "../../../../placeholder-data/state-placeholder-data";
 import { gap6 } from "../../../../constants/tailwind-utility-classes";
+import { produce } from "immer";
+import { v4 as uuidv4 } from "uuid";
 import Button from "../../../generic/Buttons/Button";
+
+type ResumeDataType =
+    | "primaryEducation"
+    | "secondaryEducation"
+    | "workExperience";
 
 interface FormInformationContainerProps {
     personalDetails: PersonalDetails;
@@ -38,9 +50,57 @@ export const FormInformationContainer = ({
     setSecondaryEducation,
     setWorkExperience,
 }: FormInformationContainerProps) => {
-    const [activeDropdown, setActiveDropdown] = useState<
-        null | "primaryEducation" | "secondaryEducation" | "workExperience"
-    >(null);
+    const [activeDropdown, setActiveDropdown] = useState<null | ResumeDataType>(
+        null
+    );
+
+    const createNewResumeData = (dataType: ResumeDataType) => {
+        let setterFunc;
+        let newDataName;
+        let dataKeys;
+        switch (dataType) {
+            case "primaryEducation":
+                setterFunc = setPrimaryEducation;
+                newDataName = `Primary Education #${
+                    Object.keys(primaryEducation).length + 1
+                }`;
+                dataKeys = Object.keys(
+                    PrimaryEducationPlaceholderData
+                ) as Array<keyof PrimaryEducation>;
+                break;
+            case "secondaryEducation":
+                setterFunc = setSecondaryEducation;
+                newDataName = `Tertiary Education #${
+                    Object.keys(secondaryEducation).length + 1
+                }`;
+                dataKeys = Object.keys(
+                    SecondaryEducationPlaceholderData
+                ) as Array<keyof SecondaryEducation>;
+                break;
+            case "workExperience":
+                setterFunc = setWorkExperience;
+                newDataName = `Work Experience #${
+                    Object.keys(workExperience).length + 1
+                }`;
+                dataKeys = Object.keys(WorkExperiencePlaceholderData) as Array<
+                    keyof WorkExperience
+                >;
+                break;
+        }
+
+        setterFunc(
+            produce((draft: { [k: string]: any }) => {
+                const obj: any = {};
+                console.log(dataKeys);
+                for (let i = 0; i < dataKeys.length; i++) {
+                    const key = dataKeys[i];
+                    obj[dataKeys[i]] = key == "Name" ? newDataName : "";
+                }
+
+                draft[uuidv4()] = obj;
+            })
+        );
+    };
 
     return (
         <div className={`flex flex-col w-full ${gap6}`}>
@@ -67,6 +127,7 @@ export const FormInformationContainer = ({
                     setActiveDropdown(null);
                     setTimeout(() => setActiveDropdown("primaryEducation"), 0);
                 }}
+                onAddListItem={() => createNewResumeData("primaryEducation")}
             >
                 {Object.keys(primaryEducation).map(
                     (primaryInstitutionName, index) => (
@@ -99,6 +160,7 @@ export const FormInformationContainer = ({
                         0
                     );
                 }}
+                onAddListItem={() => createNewResumeData("secondaryEducation")}
             >
                 {Object.keys(secondaryEducation).map(
                     (secondaryInstitutionName, index) => (
@@ -131,6 +193,7 @@ export const FormInformationContainer = ({
                     setActiveDropdown(null);
                     setTimeout(() => setActiveDropdown("workExperience"), 0);
                 }}
+                onAddListItem={() => createNewResumeData("workExperience")}
             >
                 {Object.keys(workExperience).map((workplace, index) => (
                     <DropdownItem

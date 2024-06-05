@@ -13,6 +13,7 @@ interface FormDropdownProps<T extends { [key: string]: any }>
     dropdownData: { [k: string]: T }; // all the data that is used for each <DropdownItem />'s form
     setDropdownData: React.Dispatch<React.SetStateAction<{ [k: string]: T }>>;
     onShrink?: () => void;
+    onAddListItem?: () => void;
 }
 
 export default function FormDropdown<T extends { [key: string]: any }>({
@@ -20,6 +21,7 @@ export default function FormDropdown<T extends { [key: string]: any }>({
     dropdownData,
     setDropdownData,
     onShrink,
+    onAddListItem,
     ...props
 }: FormDropdownProps<T>) {
     const [visibleForm, setVisibleForm] =
@@ -91,8 +93,10 @@ export default function FormDropdown<T extends { [key: string]: any }>({
                     });
                 }
             })}
+
+            {/* add dropdown item btn */}
             <div className="flex justify-center items-center mt-2">
-                <Button variant="success" visibleHover={true}>
+                <Button variant="success" visibleHover={true} onClick={onAddListItem}>
                     <i className="fa-solid fa-plus"></i>
                     {{ ...props }.name}
                 </Button>
