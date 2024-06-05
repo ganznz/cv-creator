@@ -129,15 +129,13 @@ export const FormInformationContainer = ({
                 }}
                 onAddListItem={() => createNewResumeData("primaryEducation")}
             >
-                {Object.keys(primaryEducation).map(
-                    (primaryInstitutionName, index) => (
-                        <DropdownItem
-                            key={index}
-                            dataName={primaryInstitutionName}
-                            name={primaryEducation[primaryInstitutionName].Name}
-                        />
-                    )
-                )}
+                {Object.keys(primaryEducation).map((dataUUID, index) => (
+                    <DropdownItem
+                        key={index}
+                        dataUUID={dataUUID}
+                        name={primaryEducation[dataUUID].Name}
+                    ></DropdownItem>
+                ))}
             </FormDropdown>
 
             <FormDropdown
@@ -162,18 +160,13 @@ export const FormInformationContainer = ({
                 }}
                 onAddListItem={() => createNewResumeData("secondaryEducation")}
             >
-                {Object.keys(secondaryEducation).map(
-                    (secondaryInstitutionName, index) => (
-                        <DropdownItem
-                            key={index}
-                            dataName={secondaryInstitutionName}
-                            name={
-                                secondaryEducation[secondaryInstitutionName]
-                                    .Name
-                            }
-                        />
-                    )
-                )}
+                {Object.keys(secondaryEducation).map((dataUUID, index) => (
+                    <DropdownItem
+                        key={index}
+                        dataUUID={dataUUID}
+                        name={secondaryEducation[dataUUID].Name}
+                    ></DropdownItem>
+                ))}
             </FormDropdown>
 
             <FormDropdown
@@ -195,11 +188,11 @@ export const FormInformationContainer = ({
                 }}
                 onAddListItem={() => createNewResumeData("workExperience")}
             >
-                {Object.keys(workExperience).map((workplace, index) => (
+                {Object.keys(workExperience).map((dataUUID, index) => (
                     <DropdownItem
                         key={index}
-                        dataName={workplace}
-                        name={workExperience[workplace].Name}
+                        dataUUID={dataUUID}
+                        name={workExperience[dataUUID].Name}
                     >
                         {/* interaction btn container for the dropdown item */}
                         <div className="flex absolute right-0 gap-2">

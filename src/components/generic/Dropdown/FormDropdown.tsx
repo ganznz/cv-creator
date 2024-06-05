@@ -86,7 +86,7 @@ export default function FormDropdown<T extends { [key: string]: any }>({
                 if (React.isValidElement<DropdownItemProps>(child)) {
                     return React.cloneElement(child, {
                         onClick: () => {
-                            const formName = child.props.dataName;
+                            const formName = child.props.dataUUID;
                             if (visibleForm == formName) return;
                             setVisibleForm(formName);
                         },
@@ -96,7 +96,11 @@ export default function FormDropdown<T extends { [key: string]: any }>({
 
             {/* add dropdown item btn */}
             <div className="flex justify-center items-center mt-2">
-                <Button variant="success" visibleHover={true} onClick={onAddListItem}>
+                <Button
+                    variant="success"
+                    visibleHover={true}
+                    onClick={onAddListItem}
+                >
                     <i className="fa-solid fa-plus"></i>
                     {{ ...props }.name}
                 </Button>
