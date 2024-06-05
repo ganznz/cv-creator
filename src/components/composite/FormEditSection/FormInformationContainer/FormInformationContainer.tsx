@@ -102,6 +102,27 @@ export const FormInformationContainer = ({
         );
     };
 
+    const deleteResumeData = (dataType: ResumeDataType, dataUUID: string) => {
+        let setterFunc;
+        switch (dataType) {
+            case "primaryEducation":
+                setterFunc = setPrimaryEducation;
+                break;
+            case "secondaryEducation":
+                setterFunc = setSecondaryEducation;
+                break;
+            case "workExperience":
+                setterFunc = setWorkExperience;
+                break;
+        }
+
+        setterFunc(
+            produce((draft: { [k: string]: any }) => {
+                delete draft[dataUUID];
+            })
+        );
+    };
+
     return (
         <div className={`flex flex-col w-full ${gap6}`}>
             {/* personal details form */}
@@ -134,7 +155,31 @@ export const FormInformationContainer = ({
                         key={index}
                         dataUUID={dataUUID}
                         name={primaryEducation[dataUUID].Name}
-                    ></DropdownItem>
+                    >
+                        {/* interaction btn container for the dropdown item */}
+                        <div className="flex absolute right-0 gap-2">
+                            <Button
+                                variant="success"
+                                visibleHover={true}
+                                className="bg-transparent rounded-full"
+                            >
+                                <i className="fa-solid fa-eye"></i>
+                            </Button>
+                            <Button
+                                variant="warn"
+                                visibleHover={true}
+                                className="bg-transparent rounded-full"
+                                onClick={() =>
+                                    deleteResumeData(
+                                        "primaryEducation",
+                                        dataUUID
+                                    )
+                                }
+                            >
+                                <i className="fa-solid fa-trash"></i>
+                            </Button>
+                        </div>
+                    </DropdownItem>
                 ))}
             </FormDropdown>
 
@@ -165,7 +210,31 @@ export const FormInformationContainer = ({
                         key={index}
                         dataUUID={dataUUID}
                         name={secondaryEducation[dataUUID].Name}
-                    ></DropdownItem>
+                    >
+                        {/* interaction btn container for the dropdown item */}
+                        <div className="flex absolute right-0 gap-2">
+                            <Button
+                                variant="success"
+                                visibleHover={true}
+                                className="bg-transparent rounded-full"
+                            >
+                                <i className="fa-solid fa-eye"></i>
+                            </Button>
+                            <Button
+                                variant="warn"
+                                visibleHover={true}
+                                className="bg-transparent rounded-full"
+                                onClick={() =>
+                                    deleteResumeData(
+                                        "secondaryEducation",
+                                        dataUUID
+                                    )
+                                }
+                            >
+                                <i className="fa-solid fa-trash"></i>
+                            </Button>
+                        </div>
+                    </DropdownItem>
                 ))}
             </FormDropdown>
 
@@ -207,6 +276,9 @@ export const FormInformationContainer = ({
                                 variant="warn"
                                 visibleHover={true}
                                 className="bg-transparent rounded-full"
+                                onClick={() =>
+                                    deleteResumeData("workExperience", dataUUID)
+                                }
                             >
                                 <i className="fa-solid fa-trash"></i>
                             </Button>
