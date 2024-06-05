@@ -14,6 +14,7 @@ import {
 } from "./placeholder-data/state-placeholder-data";
 import { FormEditSection } from "./components/composite/FormEditSection/FormEditSection";
 import { CvPageContainer } from "./components/composite/CvPageContainer/CvPageContainer";
+import { v4 as uuidv4 } from "uuid";
 
 function App() {
     const [personalDetails, setPersonalDetails] = useState<PersonalDetails>(
@@ -23,21 +24,19 @@ function App() {
     const [primaryEducation, setPrimaryEducation] = useState<{
         [k: string]: PrimaryEducation;
     }>({
-        [PrimaryEducationPlaceholderData["Name"]]:
-            PrimaryEducationPlaceholderData,
+        [uuidv4()]: PrimaryEducationPlaceholderData,
     });
 
     const [secondaryEducation, setSecondaryEducation] = useState<{
         [k: string]: SecondaryEducation;
     }>({
-        [SecondaryEducationPlaceholderData["Name"]]:
-            SecondaryEducationPlaceholderData,
+        [uuidv4()]: SecondaryEducationPlaceholderData,
     });
 
     const [workExperience, setWorkExperience] = useState<{
         [k: string]: WorkExperience;
     }>({
-        [WorkExperiencePlaceholderData["Name"]]: WorkExperiencePlaceholderData,
+        [uuidv4()]: WorkExperiencePlaceholderData,
     });
 
     return (
