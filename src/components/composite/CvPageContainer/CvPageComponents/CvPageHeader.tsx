@@ -6,35 +6,30 @@ interface CvPageHeaderProps {
 
 export const CvPageHeader = ({ personalDetails }: CvPageHeaderProps) => {
     return (
-        <div
-            style={{ width: "calc(28cm * 0.707)", height: "28cm" }}
-            className={`bg-white drop-shadow hover:drop-shadow-xl transition-all`}
-        >
-            <header className="w-full bg-red-500 flex flex-col content-between text-center p-8">
-                <h1 className="mb-6 italic font-bold text-4xl">
-                    {personalDetails["Full Name"]}
-                </h1>
-                <div className="flex justify-evenly gap-3">
-                    {personalDetails["Phone Number"] !== "" && (
-                        <span className="flex gap-2 items-center">
-                            <i className="fa-solid fa-phone"></i>
-                            <h4>{personalDetails["Phone Number"]}</h4>
-                        </span>
-                    )}
-                    {personalDetails.Email !== "" && (
-                        <span className="flex gap-2 items-center">
-                            <i className="fa-solid fa-envelope"></i>
-                            <h4>{personalDetails.Email}</h4>
-                        </span>
-                    )}
-                    {personalDetails.Address !== "" && (
-                        <span className="flex gap-2 items-center">
-                            <i className="fa-solid fa-house"></i>
-                            <h4>{personalDetails.Address}</h4>
-                        </span>
-                    )}
-                </div>
-            </header>
-        </div>
+        <header className="w-full bg-red-500 flex flex-col content-between text-center p-8">
+            <h1 className="mb-6 italic font-bold text-4xl">
+                {personalDetails["Full Name"]}
+            </h1>
+            <div className="flex justify-evenly gap-3">
+                {personalDetails["Phone Number"] !== "" && (
+                    <span className="flex gap-2 items-center">
+                        <i className="fa-solid fa-phone"></i>
+                        <h4>{personalDetails["Phone Number"]}</h4>
+                    </span>
+                )}
+                {personalDetails.Email !== "" && (
+                    <span className="flex gap-2 items-center">
+                        <i className="fa-solid fa-envelope"></i>
+                        <h4>{personalDetails.Email}</h4>
+                    </span>
+                )}
+                {personalDetails.Address !== "" && (
+                    <span className="flex gap-2 items-center">
+                        <i className="fa-solid fa-house"></i>
+                        <h4>{personalDetails.Address}</h4>
+                    </span>
+                )}
+            </div>
+        </header>
     );
 };
