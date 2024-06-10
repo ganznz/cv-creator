@@ -2,7 +2,7 @@ import { useState } from "react";
 import Navbar from "../../generic/Navbar/Navbar";
 import Button from "../../generic/Buttons/Button";
 import { FormInformationContainer } from "./FormInformationContainer/FormInformationContainer";
-import { gap6 } from "../../../constants/tailwind-utility-classes";
+import { gap6 } from "../../../utils/constants/tailwind-utility-classes";
 import {
     PersonalDetails,
     PrimaryEducation,

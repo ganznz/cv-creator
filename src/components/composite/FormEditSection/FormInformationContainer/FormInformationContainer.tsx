@@ -13,15 +13,11 @@ import {
     SecondaryEducationPlaceholderData,
     WorkExperiencePlaceholderData,
 } from "../../../../placeholder-data/state-placeholder-data";
-import { gap6 } from "../../../../constants/tailwind-utility-classes";
+import { gap6 } from "../../../../utils/constants/tailwind-utility-classes";
 import { produce } from "immer";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../../../generic/Buttons/Button";
-
-type ResumeDataType =
-    | "primaryEducation"
-    | "secondaryEducation"
-    | "workExperience";
+import { ResumeDataType } from "../../../../utils/constants/types";
 
 interface FormInformationContainerProps {
     personalDetails: PersonalDetails;

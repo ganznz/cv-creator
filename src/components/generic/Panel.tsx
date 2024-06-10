@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { padding2 } from "../../constants/tailwind-utility-classes";
+import { padding2 } from "../../utils/constants/tailwind-utility-classes";
 import { HTMLProps } from "react";
 
 export interface PanelProps extends HTMLProps<HTMLElement> {

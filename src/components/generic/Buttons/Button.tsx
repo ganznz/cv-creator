@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
-import { padding2 } from "../../../constants/tailwind-utility-classes";
+import { padding2 } from "../../../utils/constants/tailwind-utility-classes";
 
 export interface ButtonProps extends ComponentProps<"button"> {
     children?: React.ReactNode;

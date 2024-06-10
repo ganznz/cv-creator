@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef } from "react";
-import { padding1 } from "../../../constants/tailwind-utility-classes";
+import { padding1 } from "../../../utils/constants/tailwind-utility-classes";
 import { twMerge } from "tailwind-merge";
 
 interface InputProps extends ComponentPropsWithoutRef<"input"> {
