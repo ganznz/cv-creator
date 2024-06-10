@@ -18,7 +18,6 @@ export interface PrimaryEducation extends GenericDetails {
 
 export interface SecondaryEducation extends PrimaryEducation {
     Qualification: string;
-    Majors?: string[];
 }
 
 export interface WorkExperience extends GenericDetails {
