@@ -51,7 +51,12 @@ function App() {
                 setSecondaryEducation={setSecondaryEducation}
                 setWorkExperience={setWorkExperience}
             ></FormEditSection>
-            <CvPageContainer>lorem ipsum</CvPageContainer>
+            <CvPageContainer
+                personalDetails={personalDetails}
+                primaryEducation={primaryEducation}
+                secondaryEducation={secondaryEducation}
+                workExperience={workExperience}
+            />
         </div>
     );
 }
