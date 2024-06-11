@@ -7,7 +7,7 @@ interface CategoryHeaderProps extends HTMLProps<HTMLDivElement> {
 
 export const CategoryHeader = ({ text, className }: CategoryHeaderProps) => {
     let classes =
-        "flex justify-center content-center bg-slate-200 font-bold p-2";
+        "flex justify-center content-center bg-[#f0f0f0] font-bold p-1";
     classes = className ? twMerge(classes, className) : classes;
     return (
         <div className={classes}>
