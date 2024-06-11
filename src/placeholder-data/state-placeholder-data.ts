@@ -43,7 +43,7 @@ export const SecondaryEducationPlaceholderData2: SecondaryEducation = {
 export const WorkExperiencePlaceholderData: WorkExperience = {
     Name: "UoA Snowsports Club",
     ["Job Position"]: "Fullstack Developer",
-    Timeline: "2002 - present",
+    Timeline: "March 2024 - present",
     City: "Auckland",
     Country: "New Zealand",
     Details:
