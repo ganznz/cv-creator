@@ -22,7 +22,7 @@ export interface SecondaryEducation extends PrimaryEducation {
 
 export interface WorkExperience extends GenericDetails {
     Name: string;
-    Workplace: string;
+    ["Job Position"]: string;
 }
 
 export interface PersonalSkill {
