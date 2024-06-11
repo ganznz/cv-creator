@@ -10,7 +10,9 @@ import {
     PersonalDetailsPlaceholderData,
     PrimaryEducationPlaceholderData,
     SecondaryEducationPlaceholderData,
+    SecondaryEducationPlaceholderData2,
     WorkExperiencePlaceholderData,
+    WorkExperiencePlaceholderData2,
 } from "./placeholder-data/state-placeholder-data";
 import { FormEditSection } from "./components/composite/FormEditSection/FormEditSection";
 import { CvPageContainer } from "./components/composite/CvPageContainer/CvPageContainer";
@@ -31,12 +33,14 @@ function App() {
         [k: string]: SecondaryEducation;
     }>({
         [uuidv4()]: SecondaryEducationPlaceholderData,
+        [uuidv4()]: SecondaryEducationPlaceholderData2,
     });
 
     const [workExperience, setWorkExperience] = useState<{
         [k: string]: WorkExperience;
     }>({
         [uuidv4()]: WorkExperiencePlaceholderData,
+        [uuidv4()]: WorkExperiencePlaceholderData2,
     });
 
     return (

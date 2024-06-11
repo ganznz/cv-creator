@@ -13,7 +13,9 @@ import {
     PersonalDetailsPlaceholderData,
     PrimaryEducationPlaceholderData,
     SecondaryEducationPlaceholderData,
+    SecondaryEducationPlaceholderData2,
     WorkExperiencePlaceholderData,
+    WorkExperiencePlaceholderData2,
 } from "../../../placeholder-data/state-placeholder-data";
 import { produce } from "immer";
 import { v4 as uuidv4 } from "uuid";
@@ -70,9 +72,11 @@ export const FormEditSection = ({
         });
         setSecondaryEducation({
             [uuidv4()]: SecondaryEducationPlaceholderData,
+            [uuidv4()]: SecondaryEducationPlaceholderData2,
         });
         setWorkExperience({
             [uuidv4()]: WorkExperiencePlaceholderData,
+            [uuidv4()]: WorkExperiencePlaceholderData2,
         });
     };
 
