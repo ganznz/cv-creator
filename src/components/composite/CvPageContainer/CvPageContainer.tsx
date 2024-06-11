@@ -19,8 +19,8 @@ export const CvPageContainer = ({
     personalDetails,
     primaryEducation,
     secondaryEducation,
-}: // workExperience,
-CvPageContainerProps) => {
+    workExperience,
+}: CvPageContainerProps) => {
     return (
         <div
             style={{ width: "calc(28cm * 0.707)", height: "28cm" }}
@@ -33,35 +33,55 @@ CvPageContainerProps) => {
             <div className="flex flex-col gap-8 p-12">
                 <span className="flex flex-col gap-2">
                     <CategoryHeader text="Education"></CategoryHeader>
+
+                    {/* primary education */}
                     <h4 className="text-md font-bold italic">
                         Primary Education
                     </h4>
-                    {Object.entries(primaryEducation).map(
-                        ([dataUUID, dataObj]) => (
-                            <ExperienceInfo
-                                key={dataUUID}
-                                infoType="primaryEducation"
-                                infoData={dataObj}
-                                metaInfoWidth={175}
-                            />
-                        )
-                    )}
-                    <h4 className="text-md font-bold italic mt-7">
+                    <div className="flex flex-col gap-4">
+                        {Object.entries(primaryEducation).map(
+                            ([dataUUID, dataObj]) => (
+                                <ExperienceInfo
+                                    key={dataUUID}
+                                    infoType="primaryEducation"
+                                    infoData={dataObj}
+                                    metaInfoWidth={175}
+                                />
+                            )
+                        )}
+                    </div>
+
+                    {/* tertiary education */}
+                    <h4 className="text-md font-bold italic">
                         Tertiary Education
                     </h4>
-                    {Object.entries(secondaryEducation).map(
-                        ([dataUUID, dataObj]) => (
-                            <ExperienceInfo
-                                key={dataUUID}
-                                infoType="secondaryEducation"
-                                infoData={dataObj}
-                                metaInfoWidth={175}
-                            />
-                        )
-                    )}
+                    <div className="flex flex-col gap-4">
+                        {Object.entries(secondaryEducation).map(
+                            ([dataUUID, dataObj]) => (
+                                <ExperienceInfo
+                                    key={dataUUID}
+                                    infoType="secondaryEducation"
+                                    infoData={dataObj}
+                                    metaInfoWidth={175}
+                                />
+                            )
+                        )}
+                    </div>
                 </span>
 
                 <CategoryHeader text="Work Experience"></CategoryHeader>
+                <div className="flex flex-col gap-4">
+                    {Object.entries(workExperience).map(
+                        ([dataUUID, dataObj]) => (
+                            <ExperienceInfo
+                                key={dataUUID}
+                                infoType="workExperience"
+                                infoData={dataObj}
+                                metaInfoWidth={175}
+                            />
+                        )
+                    )}
+                </div>
             </div>
         </div>
     );
