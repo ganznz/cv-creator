@@ -9,8 +9,10 @@ export interface DropdownItemProps extends ButtonProps {
 export default function DropdownItem({
     children,
     name,
+    dataUUID,
     ...props
 }: DropdownItemProps) {
+    dataUUID;
     let classes = `flex -mx-2`;
     classes = { ...props }.className
         ? `${classes} ${{ ...props }.className}`
