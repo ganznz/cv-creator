@@ -106,11 +106,9 @@ export const FormInformationContainer = ({
         );
 
         setResumeDataVisibility(
-            produce(
-                (draft: { [k: keyof typeof primaryEducation]: boolean }) => {
-                    draft[dataUUID] = true;
-                }
-            )
+            produce((draft: { [k: string]: boolean }) => {
+                draft[dataUUID] = true;
+            })
         );
     };
 
@@ -133,15 +131,19 @@ export const FormInformationContainer = ({
                 delete draft[dataUUID];
             })
         );
+
+        setResumeDataVisibility(
+            produce((draft: { [k: string]: boolean }) => {
+                delete draft[dataUUID];
+            })
+        );
     };
 
     const toggleResumeDataVisibility = (dataUUID: string) => {
         setResumeDataVisibility(
-            produce(
-                (draft: { [k: keyof typeof primaryEducation]: boolean }) => {
-                    draft[dataUUID] = !draft[dataUUID];
-                }
-            )
+            produce((draft: { [k: string]: boolean }) => {
+                draft[dataUUID] = !draft[dataUUID];
+            })
         );
     };
 
