@@ -35,6 +35,11 @@ interface FormEditSectionProps {
     setWorkExperience: React.Dispatch<
         React.SetStateAction<{ [k: string]: WorkExperience }>
     >;
+    setResumeDataVisibility: React.Dispatch<
+        React.SetStateAction<{
+            [k: string]: boolean;
+        }>
+    >;
 }
 
 export const FormEditSection = ({
@@ -46,6 +51,7 @@ export const FormEditSection = ({
     setPrimaryEducation,
     setSecondaryEducation,
     setWorkExperience,
+    setResumeDataVisibility,
 }: FormEditSectionProps) => {
     // remove form state of all their data
     const wipeAllForms = () => {
@@ -67,16 +73,39 @@ export const FormEditSection = ({
     // populate form state with placeholder data
     const populateAllForms = () => {
         setPersonalDetails(PersonalDetailsPlaceholderData);
+        const primary1UUID = uuidv4();
+        const secondary1UUID = uuidv4();
+        const secondary2UUID = uuidv4();
+        const workExperience1UUID = uuidv4();
+        const workExperience2UUID = uuidv4();
         setPrimaryEducation({
-            [uuidv4()]: PrimaryEducationPlaceholderData,
+            [primary1UUID]: PrimaryEducationPlaceholderData,
         });
         setSecondaryEducation({
-            [uuidv4()]: SecondaryEducationPlaceholderData,
-            [uuidv4()]: SecondaryEducationPlaceholderData2,
+            [secondary1UUID]: SecondaryEducationPlaceholderData,
+            [secondary2UUID]: SecondaryEducationPlaceholderData2,
         });
         setWorkExperience({
-            [uuidv4()]: WorkExperiencePlaceholderData,
-            [uuidv4()]: WorkExperiencePlaceholderData2,
+            [workExperience1UUID]: WorkExperiencePlaceholderData,
+            [workExperience2UUID]: WorkExperiencePlaceholderData2,
+        });
+
+        [
+            primary1UUID,
+            secondary1UUID,
+            secondary2UUID,
+            workExperience1UUID,
+            workExperience2UUID,
+        ].forEach((uuid) => {
+            setResumeDataVisibility(
+                produce(
+                    (draft: {
+                        [k: keyof typeof primaryEducation]: boolean;
+                    }) => {
+                        draft[uuid] = true;
+                    }
+                )
+            );
         });
     };
 
@@ -141,6 +170,7 @@ export const FormEditSection = ({
                         setPrimaryEducation={setPrimaryEducation}
                         setSecondaryEducation={setSecondaryEducation}
                         setWorkExperience={setWorkExperience}
+                        setResumeDataVisibility={setResumeDataVisibility}
                     ></FormInformationContainer>
                 )}
             </div>
