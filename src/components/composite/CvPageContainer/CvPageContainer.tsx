@@ -13,6 +13,9 @@ interface CvPageContainerProps {
     primaryEducation: { [k: string]: PrimaryEducation };
     secondaryEducation: { [k: string]: SecondaryEducation };
     workExperience: { [k: string]: WorkExperience };
+    resumeDataVisibility: {
+        [k: string]: boolean;
+    };
 }
 
 export const CvPageContainer = ({
@@ -20,6 +23,7 @@ export const CvPageContainer = ({
     primaryEducation,
     secondaryEducation,
     workExperience,
+    resumeDataVisibility,
 }: CvPageContainerProps) => {
     return (
         <div
@@ -45,14 +49,15 @@ export const CvPageContainer = ({
                         )}
                         <div className="flex flex-col gap-4">
                             {Object.entries(primaryEducation).map(
-                                ([dataUUID, dataObj]) => (
-                                    <ExperienceInfo
-                                        key={dataUUID}
-                                        infoType="primaryEducation"
-                                        infoData={dataObj}
-                                        metaInfoWidth={175}
-                                    />
-                                )
+                                ([dataUUID, dataObj]) =>
+                                    resumeDataVisibility[dataUUID] && (
+                                        <ExperienceInfo
+                                            key={dataUUID}
+                                            infoType="primaryEducation"
+                                            infoData={dataObj}
+                                            metaInfoWidth={175}
+                                        />
+                                    )
                             )}
                         </div>
 
@@ -64,14 +69,15 @@ export const CvPageContainer = ({
                         )}
                         <div className="flex flex-col gap-4">
                             {Object.entries(secondaryEducation).map(
-                                ([dataUUID, dataObj]) => (
-                                    <ExperienceInfo
-                                        key={dataUUID}
-                                        infoType="secondaryEducation"
-                                        infoData={dataObj}
-                                        metaInfoWidth={175}
-                                    />
-                                )
+                                ([dataUUID, dataObj]) =>
+                                    resumeDataVisibility[dataUUID] && (
+                                        <ExperienceInfo
+                                            key={dataUUID}
+                                            infoType="secondaryEducation"
+                                            infoData={dataObj}
+                                            metaInfoWidth={175}
+                                        />
+                                    )
                             )}
                         </div>
                     </span>
@@ -82,14 +88,15 @@ export const CvPageContainer = ({
                         <CategoryHeader text="Work Experience"></CategoryHeader>
                         <div className="flex flex-col gap-4">
                             {Object.entries(workExperience).map(
-                                ([dataUUID, dataObj]) => (
-                                    <ExperienceInfo
-                                        key={dataUUID}
-                                        infoType="workExperience"
-                                        infoData={dataObj}
-                                        metaInfoWidth={175}
-                                    />
-                                )
+                                ([dataUUID, dataObj]) =>
+                                    resumeDataVisibility[dataUUID] && (
+                                        <ExperienceInfo
+                                            key={dataUUID}
+                                            infoType="workExperience"
+                                            infoData={dataObj}
+                                            metaInfoWidth={175}
+                                        />
+                                    )
                             )}
                         </div>
                     </>
