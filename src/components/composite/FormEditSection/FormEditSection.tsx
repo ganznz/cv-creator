@@ -68,6 +68,8 @@ export const FormEditSection = ({
         setPrimaryEducation({});
         setSecondaryEducation({});
         setWorkExperience({});
+
+        setResumeDataVisibility({});
     };
 
     // populate form state with placeholder data
@@ -98,13 +100,9 @@ export const FormEditSection = ({
             workExperience2UUID,
         ].forEach((uuid) => {
             setResumeDataVisibility(
-                produce(
-                    (draft: {
-                        [k: keyof typeof primaryEducation]: boolean;
-                    }) => {
-                        draft[uuid] = true;
-                    }
-                )
+                produce((draft: { [k: string]: boolean }) => {
+                    draft[uuid] = true;
+                })
             );
         });
     };
