@@ -55,13 +55,9 @@ function App() {
             (obj) => {
                 Object.keys(obj).map((dataUUID) => {
                     setResumeDataVisibility(
-                        produce(
-                            (draft: {
-                                [k: keyof typeof primaryEducation]: boolean;
-                            }) => {
-                                draft[dataUUID] = true;
-                            }
-                        )
+                        produce((draft: { [k: string]: boolean }) => {
+                            draft[dataUUID] = true;
+                        })
                     );
                 });
             }
