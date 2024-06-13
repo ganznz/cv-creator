@@ -35,6 +35,11 @@ interface FormInformationContainerProps {
     setWorkExperience: React.Dispatch<
         React.SetStateAction<{ [k: string]: WorkExperience }>
     >;
+    setResumeDataVisibility: React.Dispatch<
+        React.SetStateAction<{
+            [k: string]: boolean;
+        }>
+    >;
 }
 
 export const FormInformationContainer = ({
@@ -46,6 +51,7 @@ export const FormInformationContainer = ({
     setPrimaryEducation,
     setSecondaryEducation,
     setWorkExperience,
+    setResumeDataVisibility,
 }: FormInformationContainerProps) => {
     const [activeDropdown, setActiveDropdown] = useState<null | ResumeDataType>(
         null
@@ -85,6 +91,8 @@ export const FormInformationContainer = ({
                 break;
         }
 
+        const dataUUID = uuidv4();
+
         setterFunc(
             produce((draft: { [k: string]: any }) => {
                 const obj: any = {};
@@ -93,8 +101,16 @@ export const FormInformationContainer = ({
                     obj[dataKeys[i]] = key == "Name" ? newDataName : "";
                 }
 
-                draft[uuidv4()] = obj;
+                draft[dataUUID] = obj;
             })
+        );
+
+        setResumeDataVisibility(
+            produce(
+                (draft: { [k: keyof typeof primaryEducation]: boolean }) => {
+                    draft[dataUUID] = true;
+                }
+            )
         );
     };
 
@@ -119,6 +135,16 @@ export const FormInformationContainer = ({
         );
     };
 
+    const toggleResumeDataVisibility = (dataUUID: string) => {
+        setResumeDataVisibility(
+            produce(
+                (draft: { [k: keyof typeof primaryEducation]: boolean }) => {
+                    draft[dataUUID] = !draft[dataUUID];
+                }
+            )
+        );
+    };
+
     const determineInputType = (
         dataType: ResumeDataType,
         dataKey: string,
@@ -136,7 +162,6 @@ export const FormInformationContainer = ({
         let placeholderText = "";
         let descriptionText = "";
 
-        console.log(dataType);
         switch (dataKey) {
             case "Qualification":
                 descriptionText = "recommended";
@@ -228,6 +253,9 @@ export const FormInformationContainer = ({
                                 variant="success"
                                 visibleHover={true}
                                 className="bg-transparent rounded-full"
+                                onClick={() =>
+                                    toggleResumeDataVisibility(dataUUID)
+                                }
                             >
                                 <i className="fa-solid fa-eye"></i>
                             </Button>
@@ -285,6 +313,9 @@ export const FormInformationContainer = ({
                                 variant="success"
                                 visibleHover={true}
                                 className="bg-transparent rounded-full"
+                                onClick={() =>
+                                    toggleResumeDataVisibility(dataUUID)
+                                }
                             >
                                 <i className="fa-solid fa-eye"></i>
                             </Button>
@@ -339,6 +370,9 @@ export const FormInformationContainer = ({
                                 variant="success"
                                 visibleHover={true}
                                 className="bg-transparent rounded-full"
+                                onClick={() =>
+                                    toggleResumeDataVisibility(dataUUID)
+                                }
                             >
                                 <i className="fa-solid fa-eye"></i>
                             </Button>
