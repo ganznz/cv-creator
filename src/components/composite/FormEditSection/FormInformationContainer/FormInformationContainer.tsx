@@ -18,6 +18,7 @@ import { produce } from "immer";
 import { v4 as uuidv4 } from "uuid";
 import Button from "../../../generic/Buttons/Button";
 import { ResumeDataType } from "../../../../utils/constants/types";
+import Input from "../../../generic/Inputs/Input";
 
 interface FormInformationContainerProps {
     personalDetails: PersonalDetails;
@@ -87,7 +88,6 @@ export const FormInformationContainer = ({
         setterFunc(
             produce((draft: { [k: string]: any }) => {
                 const obj: any = {};
-                console.log(dataKeys);
                 for (let i = 0; i < dataKeys.length; i++) {
                     const key = dataKeys[i];
                     obj[dataKeys[i]] = key == "Name" ? newDataName : "";
@@ -119,6 +119,74 @@ export const FormInformationContainer = ({
         );
     };
 
+    const determineInputType = (
+        dataType: ResumeDataType,
+        dataKey: string,
+        key: string,
+        value: string,
+        onChange: React.ChangeEventHandler<HTMLInputElement>
+    ) => {
+        const props = {
+            ["label"]: dataKey,
+            ["key"]: key,
+            ["value"]: value,
+            ["onChange"]: onChange,
+        };
+
+        let placeholderText = "";
+        let descriptionText = "";
+
+        console.log(dataType);
+        switch (dataKey) {
+            case "Qualification":
+                descriptionText = "recommended";
+                placeholderText =
+                    "MBChB, Bachelor of Medicine and Bachelor of Surgery";
+                break;
+
+            case "Job Position":
+                descriptionText = "recommended";
+                placeholderText = "Software Engineer";
+                break;
+
+            case "Timeline":
+                descriptionText = "recommended";
+                placeholderText = "January 2024 - present";
+                break;
+
+            case "City":
+                placeholderText = "Paris";
+                break;
+
+            case "Country":
+                placeholderText = "France";
+                break;
+
+            case "Details":
+                // create <textarea /> component for here
+                descriptionText = "recommended";
+
+                if (dataType == "primaryEducation") {
+                    placeholderText = "I participated in extracurricular...";
+                } else if (dataType == "secondaryEducation") {
+                    placeholderText =
+                        "While studying medicine and surgery here...";
+                } else if (dataType == "workExperience") {
+                    placeholderText =
+                        "During my time as a software engineer...";
+                }
+                break;
+        }
+
+        return (
+            <Input
+                placeholder={placeholderText}
+                description={descriptionText}
+                {...props}
+            />
+        );
+    };
+
     return (
         <div className={`flex flex-col w-full ${gap6}`}>
             {/* personal details form */}
@@ -138,6 +206,7 @@ export const FormInformationContainer = ({
                     )
                 }
                 expanded={activeDropdown === "primaryEducation"}
+                dataType="primaryEducation"
                 dropdownData={primaryEducation}
                 setDropdownData={setPrimaryEducation}
                 onShrink={() => {
@@ -145,6 +214,7 @@ export const FormInformationContainer = ({
                     setTimeout(() => setActiveDropdown("primaryEducation"), 0);
                 }}
                 onAddListItem={() => createNewResumeData("primaryEducation")}
+                determineInput={determineInputType}
             >
                 {Object.keys(primaryEducation).map((dataUUID, index) => (
                     <DropdownItem
@@ -190,6 +260,7 @@ export const FormInformationContainer = ({
                     )
                 }
                 expanded={activeDropdown === "secondaryEducation"}
+                dataType="secondaryEducation"
                 dropdownData={secondaryEducation}
                 setDropdownData={setSecondaryEducation}
                 onShrink={() => {
@@ -200,6 +271,7 @@ export const FormInformationContainer = ({
                     );
                 }}
                 onAddListItem={() => createNewResumeData("secondaryEducation")}
+                determineInput={determineInputType}
             >
                 {Object.keys(secondaryEducation).map((dataUUID, index) => (
                     <DropdownItem
@@ -245,6 +317,7 @@ export const FormInformationContainer = ({
                     )
                 }
                 expanded={activeDropdown === "workExperience"}
+                dataType="workExperience"
                 dropdownData={workExperience}
                 setDropdownData={setWorkExperience}
                 onShrink={() => {
@@ -252,6 +325,7 @@ export const FormInformationContainer = ({
                     setTimeout(() => setActiveDropdown("workExperience"), 0);
                 }}
                 onAddListItem={() => createNewResumeData("workExperience")}
+                determineInput={determineInputType}
             >
                 {Object.keys(workExperience).map((dataUUID, index) => (
                     <DropdownItem

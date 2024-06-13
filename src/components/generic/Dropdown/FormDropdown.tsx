@@ -7,21 +7,32 @@ import Button from "../Buttons/Button";
 import { DropdownItemProps } from "./DropdownItem";
 import Input from "../Inputs/Input";
 import { produce } from "immer";
+import { ResumeDataType } from "../../../utils/constants/types";
 
 interface FormDropdownProps<T extends { [key: string]: any }>
     extends ExpandableDropdownProps {
+    dataType: ResumeDataType;
     dropdownData: { [k: string]: T }; // all the data that is used for each <DropdownItem />'s form
     setDropdownData: React.Dispatch<React.SetStateAction<{ [k: string]: T }>>;
     onShrink?: () => void;
     onAddListItem?: () => void;
+    determineInput?: (
+        dataType: ResumeDataType,
+        dataKey: string,
+        key: string,
+        value: string,
+        onChange: React.ChangeEventHandler<HTMLInputElement>
+    ) => JSX.Element; // determine input based on dropdownData
 }
 
 export default function FormDropdown<T extends { [key: string]: any }>({
     children,
+    dataType,
     dropdownData,
     setDropdownData,
     onShrink,
     onAddListItem,
+    determineInput,
     ...props
 }: FormDropdownProps<T>) {
     const [visibleForm, setVisibleForm] =
@@ -58,14 +69,25 @@ export default function FormDropdown<T extends { [key: string]: any }>({
                 />
                 {Object.keys(formData)
                     .filter((key) => key !== "Name")
-                    .map((dataKey: string, i) => (
-                        <Input
-                            label={dataKey}
-                            key={i}
-                            value={formData[dataKey]}
-                            onChange={(e) => updateDropdownData(e, dataKey)}
-                        />
-                    ))}
+                    .map((dataKey: string, i) => {
+                        if (determineInput) {
+                            return determineInput(
+                                dataType,
+                                dataKey,
+                                i.toString(),
+                                formData[dataKey],
+                                (e) => updateDropdownData(e, dataKey)
+                            );
+                        }
+                        return (
+                            <Input
+                                label={dataKey}
+                                key={i}
+                                value={formData[dataKey]}
+                                onChange={(e) => updateDropdownData(e, dataKey)}
+                            />
+                        );
+                    })}
                 <Button
                     className="mt-5"
                     variant="success"
