@@ -224,7 +224,7 @@ export const FormInformationContainer = ({
 
             <FormDropdown
                 name="Primary Education"
-                icon={<i className="fa-solid fa-child"></i>}
+                icon={<i className="fa-solid fa-child fa-xl"></i>}
                 onClick={() =>
                     setActiveDropdown(
                         activeDropdown === "primaryEducation"
@@ -248,9 +248,10 @@ export const FormInformationContainer = ({
                         key={index}
                         dataUUID={dataUUID}
                         name={primaryEducation[dataUUID].Name}
+                        className="items-center"
                     >
                         {/* interaction btn container for the dropdown item */}
-                        <div className="flex absolute right-0 gap-2">
+                        <div className="flex absolute right-0">
                             <Button
                                 variant="success"
                                 visibleHover={true}
@@ -281,7 +282,7 @@ export const FormInformationContainer = ({
 
             <FormDropdown
                 name="Tertiary Education"
-                icon={<i className="fa-solid fa-user-graduate"></i>}
+                icon={<i className="fa-solid fa-user-graduate fa-lg"></i>}
                 onClick={() =>
                     setActiveDropdown(
                         activeDropdown === "secondaryEducation"
@@ -308,6 +309,7 @@ export const FormInformationContainer = ({
                         key={index}
                         dataUUID={dataUUID}
                         name={secondaryEducation[dataUUID].Name}
+                        className="items-center"
                     >
                         {/* interaction btn container for the dropdown item */}
                         <div className="flex absolute right-0 gap-2">
@@ -341,7 +343,7 @@ export const FormInformationContainer = ({
 
             <FormDropdown
                 name="Work Experience"
-                icon={<i className="fa-solid fa-briefcase"></i>}
+                icon={<i className="fa-solid fa-briefcase fa-lg"></i>}
                 onClick={() =>
                     setActiveDropdown(
                         activeDropdown === "workExperience"
@@ -365,6 +367,7 @@ export const FormInformationContainer = ({
                         key={index}
                         dataUUID={dataUUID}
                         name={workExperience[dataUUID].Name}
+                        className="items-center"
                     >
                         {/* interaction btn container for the dropdown item */}
                         <div className="flex absolute right-0 gap-2">

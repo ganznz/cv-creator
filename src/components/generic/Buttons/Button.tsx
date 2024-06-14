@@ -119,7 +119,7 @@ export default function Button({
     className,
     ...props
 }: ButtonProps) {
-    let classes = `flex flex-1 justify-center content-center transition-colors rounded ${padding2}`;
+    let classes = `flex flex-1 justify-center items-center gap-2 transition-colors rounded ${padding2} flex items-center`;
     classes = className ? twMerge(classes, className) : classes;
 
     switch (variant) {

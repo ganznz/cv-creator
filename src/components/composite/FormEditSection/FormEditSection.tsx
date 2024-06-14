@@ -156,10 +156,8 @@ export const FormEditSection = ({
                         visibleHover={true}
                         onClick={wipeAllForms}
                     >
-                        <span className="flex justify-center content-center">
-                            <i className="fa-solid fa-user"></i>
-                            Clear Resume
-                        </span>
+                        <i className="fa-solid fa-user"></i>
+                        Clear Resume
                     </Button>
                 </Navbar>
                 {/* add content section here (edit personal details, education, experience, etc) */}
