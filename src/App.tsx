@@ -49,6 +49,11 @@ function App() {
         [k: string]: boolean;
     }>({});
 
+    const [resumeColours, setResumeColours] = useState<string[]>([
+        "#000", // primary colour
+        "#ebebeb", // secondary colour
+    ]);
+
     // set visibility of all data to true (visible)
     useEffect(() => {
         [primaryEducation, secondaryEducation, workExperience].forEach(
@@ -72,11 +77,13 @@ function App() {
                 primaryEducation={primaryEducation}
                 secondaryEducation={secondaryEducation}
                 workExperience={workExperience}
+                resumeColours={resumeColours}
                 setPersonalDetails={setPersonalDetails}
                 setPrimaryEducation={setPrimaryEducation}
                 setSecondaryEducation={setSecondaryEducation}
                 setWorkExperience={setWorkExperience}
                 setResumeDataVisibility={setResumeDataVisibility}
+                setResumeColours={setResumeColours}
             ></FormEditSection>
             <CvPageContainer
                 personalDetails={personalDetails}
@@ -84,6 +91,7 @@ function App() {
                 secondaryEducation={secondaryEducation}
                 workExperience={workExperience}
                 resumeDataVisibility={resumeDataVisibility}
+                resumeColours={resumeColours}
             />
         </div>
     );
