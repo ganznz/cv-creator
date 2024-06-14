@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { PersonalDetailsContainer } from "./PersonalDetailsContainer/PersonalDetailsContainer";
 import FormDropdown from "../../../generic/Dropdown/FormDropdown";
 import DropdownItem from "../../../generic/Dropdown/DropdownItem";
@@ -19,6 +19,7 @@ import { v4 as uuidv4 } from "uuid";
 import Button from "../../../generic/Buttons/Button";
 import { ResumeDataType } from "../../../../utils/constants/types";
 import Input from "../../../generic/Inputs/Input";
+import { TextArea } from "../../../generic/TextArea/TextArea";
 
 interface FormInformationContainerProps {
     personalDetails: PersonalDetails;
@@ -152,13 +153,14 @@ export const FormInformationContainer = ({
         dataKey: string,
         key: string,
         value: string,
-        onChange: React.ChangeEventHandler<HTMLInputElement>
+        onChange:
+            | ChangeEventHandler<HTMLInputElement>
+            | FormEventHandler<HTMLTextAreaElement>
     ) => {
         const props = {
             ["label"]: dataKey,
             ["key"]: key,
             ["value"]: value,
-            ["onChange"]: onChange,
         };
 
         let placeholderText = "";
@@ -190,7 +192,6 @@ export const FormInformationContainer = ({
                 break;
 
             case "Details":
-                // create <textarea /> component for here
                 descriptionText = "recommended";
 
                 if (dataType == "primaryEducation") {
@@ -202,13 +203,24 @@ export const FormInformationContainer = ({
                     placeholderText =
                         "During my time as a software engineer...";
                 }
-                break;
+
+                return (
+                    <TextArea
+                        placeholder={placeholderText}
+                        description={descriptionText}
+                        onChange={
+                            onChange as FormEventHandler<HTMLTextAreaElement>
+                        }
+                        {...props}
+                    />
+                );
         }
 
         return (
             <Input
                 placeholder={placeholderText}
                 description={descriptionText}
+                onChange={onChange as ChangeEventHandler<HTMLInputElement>}
                 {...props}
             />
         );
