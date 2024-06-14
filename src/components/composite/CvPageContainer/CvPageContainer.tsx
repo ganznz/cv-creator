@@ -16,6 +16,7 @@ interface CvPageContainerProps {
     resumeDataVisibility: {
         [k: string]: boolean;
     };
+    resumeColours: string[];
 }
 
 export const CvPageContainer = ({
@@ -24,6 +25,7 @@ export const CvPageContainer = ({
     secondaryEducation,
     workExperience,
     resumeDataVisibility,
+    resumeColours,
 }: CvPageContainerProps) => {
     return (
         <div
@@ -31,7 +33,11 @@ export const CvPageContainer = ({
             className={`bg-white drop-shadow hover:drop-shadow-xl transition-all`}
         >
             {/* header */}
-            <CvPageHeader personalDetails={personalDetails} />
+            <CvPageHeader
+                personalDetails={personalDetails}
+                primaryColour={resumeColours[0]}
+                secondaryColour={resumeColours[1]}
+            />
 
             {/* cv page content */}
             <div className="flex flex-col gap-8 p-12">
@@ -39,7 +45,11 @@ export const CvPageContainer = ({
                     Object.keys(secondaryEducation).length >=
                     1 && (
                     <span className="flex flex-col gap-2">
-                        <CategoryHeader text="Education"></CategoryHeader>
+                        <CategoryHeader
+                            text="Education"
+                            primaryColour={resumeColours[0]}
+                            secondaryColour={resumeColours[1]}
+                        ></CategoryHeader>
 
                         {/* primary education */}
                         {Object.keys(primaryEducation).length >= 1 && (
@@ -85,7 +95,11 @@ export const CvPageContainer = ({
 
                 {Object.keys(workExperience).length >= 1 && (
                     <>
-                        <CategoryHeader text="Work Experience"></CategoryHeader>
+                        <CategoryHeader
+                            text="Work Experience"
+                            primaryColour={resumeColours[0]}
+                            secondaryColour={resumeColours[1]}
+                        ></CategoryHeader>
                         <div className="flex flex-col gap-4">
                             {Object.entries(workExperience).map(
                                 ([dataUUID, dataObj]) =>
