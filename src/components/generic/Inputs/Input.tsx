@@ -30,20 +30,22 @@ export default function Input({
         : defaultClasses.join(" ");
 
     return (
-        <>
-            <span className="flex gap-3 -mb-1 items-center">
-                {label && (
-                    <label htmlFor={{ ...props }.id} className="font-bold">
-                        {label}
-                    </label>
-                )}
-                {description && (
-                    <p className="text-sm text-gray-500 italic">
-                        {description}
-                    </p>
-                )}
+        <div>
+            <span className="-mb-1">
+                <span className="flex gap-3 items-center">
+                    {label && (
+                        <label htmlFor={{ ...props }.id} className="font-bold">
+                            {label}
+                        </label>
+                    )}
+                    {description && (
+                        <p className="text-sm text-gray-500 italic">
+                            {description}
+                        </p>
+                    )}
+                </span>
             </span>
             <input className={classes} {...props} />
-        </>
+        </div>
     );
 }
