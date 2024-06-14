@@ -40,7 +40,10 @@ export default function FormDropdown<T extends { [key: string]: any }>({
 
     const isExpanded = { ...props }.expanded;
 
-    const updateDropdownData = (e: ChangeEvent<HTMLInputElement>, key: any) => {
+    const updateDropdownData = (
+        e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>,
+        key: any
+    ) => {
         setDropdownData(
             produce((draft) => {
                 // doing formData: T doesnt work - because of immer? ended up hardcoding type
