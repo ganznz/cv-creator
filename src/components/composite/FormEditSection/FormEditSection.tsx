@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../../generic/Navbar/Navbar";
 import Button from "../../generic/Buttons/Button";
 import { FormInformationContainer } from "./FormInformationContainer/FormInformationContainer";
+import { CustomizeContainer } from "./CustomizeContainer/CustomizeContainer";
 import { gap6 } from "../../../utils/constants/tailwind-utility-classes";
 import {
     PersonalDetails,
@@ -25,6 +26,7 @@ interface FormEditSectionProps {
     primaryEducation: { [k: string]: PrimaryEducation };
     secondaryEducation: { [k: string]: SecondaryEducation };
     workExperience: { [k: string]: WorkExperience };
+    resumeColours: string[];
     setPersonalDetails: React.Dispatch<React.SetStateAction<PersonalDetails>>;
     setPrimaryEducation: React.Dispatch<
         React.SetStateAction<{ [k: string]: PrimaryEducation }>
@@ -40,6 +42,7 @@ interface FormEditSectionProps {
             [k: string]: boolean;
         }>
     >;
+    setResumeColours: React.Dispatch<React.SetStateAction<string[]>>;
 }
 
 export const FormEditSection = ({
@@ -47,11 +50,13 @@ export const FormEditSection = ({
     primaryEducation,
     secondaryEducation,
     workExperience,
+    resumeColours,
     setPersonalDetails,
     setPrimaryEducation,
     setSecondaryEducation,
     setWorkExperience,
     setResumeDataVisibility,
+    setResumeColours,
 }: FormEditSectionProps) => {
     // remove form state of all their data
     const wipeAllForms = () => {
@@ -107,8 +112,9 @@ export const FormEditSection = ({
         });
     };
 
-    // "content", "customize"
-    const [activePanel, setActiveWindow] = useState("content");
+    const [activePanel, setActiveWindow] = useState<"content" | "customize">(
+        "content"
+    );
 
     return (
         <div className={`h-full flex ${gap6}`}>
@@ -156,7 +162,6 @@ export const FormEditSection = ({
                         </span>
                     </Button>
                 </Navbar>
-
                 {/* add content section here (edit personal details, education, experience, etc) */}
                 {activePanel == "content" && (
                     <FormInformationContainer
@@ -170,6 +175,12 @@ export const FormEditSection = ({
                         setWorkExperience={setWorkExperience}
                         setResumeDataVisibility={setResumeDataVisibility}
                     ></FormInformationContainer>
+                )}
+                {activePanel == "customize" && (
+                    <CustomizeContainer
+                        resumeColours={resumeColours}
+                        setResumeColours={setResumeColours}
+                    ></CustomizeContainer>
                 )}
             </div>
         </div>
