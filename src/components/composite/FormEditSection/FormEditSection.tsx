@@ -156,7 +156,7 @@ export const FormEditSection = ({
                         visibleHover={true}
                         onClick={wipeAllForms}
                     >
-                        <i className="fa-solid fa-user"></i>
+                        <i className="fa-solid fa-trash"></i>
                         Clear Resume
                     </Button>
                 </Navbar>
