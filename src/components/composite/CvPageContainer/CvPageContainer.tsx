@@ -44,6 +44,7 @@ export const CvPageContainer = ({
                 visibleHover={true}
                 onClick={handlePrint}
             >
+                <i className="fa-solid fa-file"></i>
                 <p className="font-bold italic">Print your CV!</p>
             </Button>
             <div
